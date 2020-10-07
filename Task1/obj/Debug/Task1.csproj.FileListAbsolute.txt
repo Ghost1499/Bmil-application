@@ -1,0 +1,10 @@
+C:\CSF\programming\programs\BMIL\Task1\Task1\bin\Debug\Task1.exe.config
+C:\CSF\programming\programs\BMIL\Task1\Task1\bin\Debug\Task1.exe
+C:\CSF\programming\programs\BMIL\Task1\Task1\bin\Debug\Task1.pdb
+C:\CSF\programming\programs\BMIL\Task1\Task1\obj\Debug\Task1.csprojAssemblyReference.cache
+C:\CSF\programming\programs\BMIL\Task1\Task1\obj\Debug\Task1.MainForm.resources
+C:\CSF\programming\programs\BMIL\Task1\Task1\obj\Debug\Task1.Properties.Resources.resources
+C:\CSF\programming\programs\BMIL\Task1\Task1\obj\Debug\Task1.csproj.GenerateResource.cache
+C:\CSF\programming\programs\BMIL\Task1\Task1\obj\Debug\Task1.csproj.CoreCompileInputs.cache
+C:\CSF\programming\programs\BMIL\Task1\Task1\obj\Debug\Task1.exe
+C:\CSF\programming\programs\BMIL\Task1\Task1\obj\Debug\Task1.pdb
