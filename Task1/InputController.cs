@@ -36,7 +36,7 @@ namespace Task1
             {
                 KeyUp(new KeyEventArgs(PasswordAction.PressedKeys[i].KeyValue), endTime);
             }
-            PasswordAction.EndTime = endTime.ToFileTime();
+            PasswordAction.EndTime = endTime;
             PasswordAction oldPasswordAction = this.passwordAction;
             this.passwordAction = null;
             return oldPasswordAction;

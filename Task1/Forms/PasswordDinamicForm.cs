@@ -17,19 +17,28 @@ namespace Task1.Forms
         {
             InitializeComponent();
             this.mainForm = mainForm;
-            InitTypingDinamicLine();
+            Init();
         }
 
-        private void InitTypingDinamicLine()
+        private void Init()
+        {
+            InitTypingDinamicLine();
+        }
+        public void Update()
         {
             UpdateTypingDinamicLine();
+            overlaysCountLabel.Text = mainForm.PasswordAction.OverlaysCount.ToString();
+        }
+        private void InitTypingDinamicLine()
+        {
+            Update();
         }
         public void UpdateTypingDinamicLine()
         {
             string[] typedSymbols;
             UpdateTypingDinamicLineFromData(mainForm.StatisticsManager.GetTypingDinamic(mainForm.PasswordActions.Last(), out typedSymbols), typedSymbols);
         }
-        public void UpdateTypingDinamicLineFromData(long[] symbolsDinamic, string[] typedSymbols)
+        public void UpdateTypingDinamicLineFromData(double[] symbolsDinamic, string[] typedSymbols)
         {
             typingDinamicChart.Series.Last().Points.Clear();
             for (int i = 0; i < symbolsDinamic.Length; i++)

@@ -24,6 +24,7 @@ namespace Task1
 
         public StatisticsManager StatisticsManager { get => statisticsManager; set => statisticsManager = value; }
         public List<PasswordAction> PasswordActions { get => passwordActions; set => passwordActions = value; }
+        public PasswordAction PasswordAction { get => passwordActions.Last();  }
 
         public MainForm()
         {
@@ -67,7 +68,7 @@ namespace Task1
                 }
                 if (dinamicForm != null)
                 {
-                    dinamicForm.UpdateTypingDinamicLine();
+                    dinamicForm.Update();
                 }
             }
             catch (InvalidPasswordException)

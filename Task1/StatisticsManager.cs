@@ -23,9 +23,9 @@ namespace Task1
         {
             return Dispersion(passwordDurations);
         }
-        public long[] GetPasswordDurations(List<PasswordAction> passwordActions)//исправить long и int
+        public double[] GetPasswordDurations(List<PasswordAction> passwordActions)//исправить long и int
         {
-            long[] result = new long[passwordActions.Count()];
+            double[] result = new double[passwordActions.Count()];
             for (int i = 0; i < result.Length; i++)
             {
                 result[i] = passwordActions[i].TimeDuration;
@@ -33,10 +33,10 @@ namespace Task1
             return result;
         }
 
-        public long[] GetTypingDinamic(PasswordAction passwordAction,out string[] typedSymbols)
+        public double[] GetTypingDinamic(PasswordAction passwordAction,out string[] typedSymbols)
         {
             int n = passwordAction.SymbolActions.Count();
-            long[] result = new long[n];
+            double[] result = new double[n];
             for (int i = 0; i < n; i++)
             {
                 if (i < 1)

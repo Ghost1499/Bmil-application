@@ -18,6 +18,7 @@ namespace Task1
         {
             InitializeComponent();
             this.mainForm = mainForm;
+           
             InitHistogram();
         }
 
@@ -39,12 +40,12 @@ namespace Task1
             UpdateHistogramByData(mainForm.StatisticsManager.GetPasswordDurations(mainForm.PasswordActions));
 
         }
-        public void UpdateHistogramByData(long[] passwordsLengths)
+        public void UpdateHistogramByData(double[] passwordsLengths)
         {
             histogramChart.Series.Last().Points.Clear();
             for (int i = 0; i < passwordsLengths.Length; i++)
             {
-                histogramChart.Series.Last().Points.AddY(passwordsLengths[i]);
+                histogramChart.Series.Last().Points.AddY(TimeSpan.FromMilliseconds(passwordsLengths[i]).TotalSeconds);
             }
         }
     }

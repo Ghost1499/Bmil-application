@@ -10,10 +10,10 @@ namespace Task1
     public class SymbolAction
     {
         private Keys keyValue;
-        private long keyDownTime;
-        private long keyUpTime;
-        private long overlayEndingTime;
-        public SymbolAction(Keys keyValue, long keyDownTime)
+        private double keyDownTime;
+        private double keyUpTime;
+        private double overlayEndingTime;
+        public SymbolAction(Keys keyValue, double keyDownTime)
         {
             this.keyValue = keyValue;
             this.keyDownTime = keyDownTime;
@@ -22,21 +22,21 @@ namespace Task1
         }
 
         public Keys KeyValue { get => keyValue; set => keyValue = value; }
-        public long KeyDownTime { get => keyDownTime; set => keyDownTime = value; }
-        public long KeyUpTime { get => keyUpTime; set => keyUpTime = value; }
-        public long KeyPressDuration
+        public double KeyDownTime { get => keyDownTime; set => keyDownTime = value; }
+        public double KeyUpTime { get => keyUpTime; set => keyUpTime = value; }
+        public double KeyPressDuration
         {
             get
             {
-                if (keyUpTime > 0)
+                if (Math.Abs(keyUpTime )> Double.Epsilon)
                 {
                     return keyUpTime - keyDownTime;
                 }
                 else { return 0; }
             }
         }
-        public long OverlayEndingTime { get => overlayEndingTime; set { if (value > overlayEndingTime) { overlayEndingTime = value; }; } }
-        public long OverlayDuration { get => overlayEndingTime - keyDownTime; }
+        public double OverlayEndingTime { get => overlayEndingTime; set { if ( value > overlayEndingTime) { overlayEndingTime = value; }; } }
+        public double OverlayDuration { get => overlayEndingTime - keyDownTime; }
         public override bool Equals(object obj)
         {
             if (obj.GetType() != this.GetType()) return false;
@@ -44,5 +44,10 @@ namespace Task1
             SymbolAction symbolAction = (SymbolAction)obj;
             return this.keyValue.Equals(symbolAction.keyValue);
         }
+
+        //private static void DoubleCompare(double val1,double val2)
+        //{
+        //    if(Math.Abs(val1-val2)>Double.Epsilon)
+        //}
     }
 }
