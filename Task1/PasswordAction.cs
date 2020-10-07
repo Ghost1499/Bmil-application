@@ -70,5 +70,15 @@ namespace Task1
         {
             return dateTime.ToFileTime()- this.startTime;
         }
+
+        public string[] GetTypedSymbols()
+        {
+            string[] result = new string[SymbolActions.Count()];
+            for (int i = 0; i < symbolActions.Count(); i++)
+            {
+                result[i] = SymbolActions[i].KeyValue.ToString();
+            }
+            return result;
+        }
     }
 }

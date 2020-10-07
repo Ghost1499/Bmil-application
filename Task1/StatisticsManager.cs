@@ -8,16 +8,9 @@ namespace Task1
 {
     public class StatisticsManager
     {
-        private readonly List<PasswordAction> passwordActions;
-
-        public StatisticsManager(List<PasswordAction> passwordActions)
+        public StatisticsManager()
         {
-            if (passwordActions == null)
-            {
-                throw new ArgumentNullException(nameof(passwordActions));
-            }
-
-            this.passwordActions = passwordActions;
+           
         }
 
 
@@ -30,7 +23,7 @@ namespace Task1
         {
             return Dispersion(passwordDurations);
         }
-        public long[] GetPasswordDurations()//исправить long и int
+        public long[] GetPasswordDurations(List<PasswordAction> passwordActions)//исправить long и int
         {
             long[] result = new long[passwordActions.Count()];
             for (int i = 0; i < result.Length; i++)
@@ -40,7 +33,7 @@ namespace Task1
             return result;
         }
 
-        public long[] GetTypingDinamic(PasswordAction passwordAction)
+        public long[] GetTypingDinamic(PasswordAction passwordAction,out string[] typedSymbols)
         {
             int n = passwordAction.SymbolActions.Count();
             long[] result = new long[n];
@@ -55,6 +48,7 @@ namespace Task1
                     result[i] = passwordAction.SymbolActions[i].KeyDownTime- passwordAction.SymbolActions[i-1].KeyDownTime;
                 }
             }
+            typedSymbols = passwordAction.GetTypedSymbols();
             return result;
         }
 

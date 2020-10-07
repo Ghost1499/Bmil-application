@@ -4,35 +4,42 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Task1.Exceptions;
 
 namespace Task1
 {
     class InputController
     {
-        private List<PasswordAction> passwordActions;
+        //private List<PasswordAction> passwordActions;
+        private PasswordAction passwordAction;
 
-        public PasswordAction PasswordAction { get => passwordActions.Last();}
-        public List<PasswordAction> PasswordActions { get => passwordActions; set => passwordActions = value; }
+        public PasswordAction PasswordAction { get => passwordAction;}
+        //public List<PasswordAction> PasswordActions { get => passwordActions; set => passwordActions = value; }
 
         public InputController()
         {
-            passwordActions = new List<PasswordAction>();
+            //passwordActions = new List<PasswordAction>();
         }
-
-        //public List<PasswordAction> InputAction { get => passwordActions; set => passwordActions = value; }
 
         public void NextPasswordAction(string password,DateTime startTime)
         {
-            passwordActions.Add(new PasswordAction(password, startTime));
+            passwordAction =new PasswordAction(password, startTime);
         }
 
-        public void EndPasswordAction(DateTime endTime)
+        public PasswordAction EndPasswordAction(DateTime endTime,string passwordValue)
         {
+            if (passwordValue != PasswordAction.ValidPassword)
+            {
+                throw new InvalidPasswordException("Invalid password exception");
+            }
             for (int i = 0; i < PasswordAction.PressedKeys.Count(); i++)
             {
                 KeyUp(new KeyEventArgs(PasswordAction.PressedKeys[i].KeyValue), endTime);
             }
             PasswordAction.EndTime = endTime.ToFileTime();
+            PasswordAction oldPasswordAction = this.passwordAction;
+            this.passwordAction = null;
+            return oldPasswordAction;
         }
         public void KeyDown(KeyEventArgs keyEventArgs, DateTime worldTime)
         {

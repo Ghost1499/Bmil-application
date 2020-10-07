@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using Task1.Exceptions;
+using Task1.Forms;
 
 namespace Task1
 {
@@ -16,12 +18,20 @@ namespace Task1
         InputController inputController;
         Settings settings;
         StatisticsManager statisticsManager;
+        List<PasswordAction> passwordActions;
+        HistogramForm histogramForm;
+        PasswordDinamicForm dinamicForm;
+
+        public StatisticsManager StatisticsManager { get => statisticsManager; set => statisticsManager = value; }
+        public List<PasswordAction> PasswordActions { get => passwordActions; set => passwordActions = value; }
+
         public MainForm()
         {
             InitializeComponent();
             settings = new Settings();
             inputController = new InputController();
-            statisticsManager = new StatisticsManager(inputController.PasswordActions);
+            statisticsManager = new StatisticsManager();
+            passwordActions = new List<PasswordAction>();
             Init();
 
             double[] vals = new double[] { 1, 2, 3, 10 };
@@ -29,50 +39,45 @@ namespace Task1
             label2.Text = StatisticsManager.Dispersion(vals).ToString();
         }
 
-        private void Init(int passwordVelocityTimerInteral=10)
-        {          
-            InitHistogram();
+        private void Init()
+        {
+            samplePasswordLabel.Text = settings.Password;
+            acceptPasswordButton.Select();
             InputLanguage.CurrentInputLanguage = InputLanguage.FromCulture(new System.Globalization.CultureInfo("en-US"));
-
-            //InputLanguage.CurrentInputLanguage=lan
         }
 
-        private void InitHistogram()
-        {
-            //this.histogramChart.ChartAreas.Add(new ChartArea("Histogram area"));
-            Series histogramSeries = new Series("Длительность набора парольной фразы в секундах");
-            histogramSeries.ChartType = SeriesChartType.Column;
-            //histogramSeries.Points.AddXY(1, 5);
-            //histogramSeries.Points.AddXY(2, 4);
-            histogramChart.Series.Clear();
-            histogramChart.Series.Add(histogramSeries);
-            UpdateHistogram(statisticsManager.GetPasswordDurations());
-        }
 
-        private void UpdateTypingDinamicLine(long[] symbolsDinamic)
-        {
-            typingDinamicChart.Series.Last().Points.Clear();
-            for (int i = 0; i < symbolsDinamic.Length; i++)
-            {
-                typingDinamicChart.Series.Last().Points.AddY(symbolsDinamic[i]);
-            }
-        }
+        
 
-        private void UpdateHistogram(long[] passwordsLengths)
-        {
-            histogramChart.Series.Last().Points.Clear();
-            for (int i = 0; i < passwordsLengths.Length; i++)
-            {
-                histogramChart.Series.Last().Points.AddY(passwordsLengths[i]);
-            }
-        }
 
         private void AcceptPassword()
         {
+            try
+            {
+                if (inputController.PasswordAction == null)
+                {
+                    MessageBox.Show("Введите пароль!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                passwordActions.Add(inputController.EndPasswordAction(DateTime.Now, passwordTextBox.Text));
+                if (histogramForm != null)
+                {
+                    histogramForm.UpdateHistogram();
 
-            inputController.EndPasswordAction(DateTime.Now);
-            UpdateHistogram(statisticsManager.GetPasswordDurations());
-            UpdateTypingDinamicLine(statisticsManager.GetTypingDinamic(inputController.PasswordAction));
+                }
+                if (dinamicForm != null)
+                {
+                    dinamicForm.UpdateTypingDinamicLine();
+                }
+            }
+            catch (InvalidPasswordException)
+            {
+                MessageBox.Show("Пароль неверный!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            catch (BaseException)
+            {
+            }
             //label1.Text = statisticsManager.GetPasswordMathExpectasion(statisticsManager.GetPasswordDurations()).ToString();
             //label2.Text = statisticsManager.GetPasswordDispersion(statisticsManager.GetPasswordDurations()).ToString();
         }
@@ -92,7 +97,7 @@ namespace Task1
         private void acceptPasswordButton_Click(object sender, EventArgs e)
         {
             AcceptPassword();
-           
+
         }
 
         private void passwordTextBox_KeyDown(object sender, KeyEventArgs e)
@@ -109,6 +114,18 @@ namespace Task1
         private void passwordTextBox_KeyUp(object sender, KeyEventArgs e)
         {
             inputController.KeyUp(e, DateTime.Now);
+        }
+
+        private void histogramToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            histogramForm = new HistogramForm(this);
+            histogramForm.Show();
+        }
+
+        private void passwordDinamicToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dinamicForm = new PasswordDinamicForm(this);
+            dinamicForm.Show();
         }
 
 
