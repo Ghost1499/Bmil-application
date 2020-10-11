@@ -49,6 +49,9 @@
   <ItemGroup>
     <Compile Include="Exceptions\BaseException.cs" />
     <Compile Include="Exceptions\InvalidPasswordException.cs" />
+    <Compile Include="Forms\ChartForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\HistogramForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -61,6 +64,18 @@
     <Compile Include="Forms\PasswordDinamicForm.Designer.cs">
       <DependentUpon>PasswordDinamicForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\PressDurationChartForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PressDurationChartForm.Designer.cs">
+      <DependentUpon>PressDurationChartForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="InputController.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
@@ -69,11 +84,13 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="PasswordAction.cs" />
+    <Compile Include="PasswordManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="StatisticsManager.cs" />
     <Compile Include="SymbolAction.cs" />
+    <Compile Include="TimeSpanConverter.cs" />
     <EmbeddedResource Include="Forms\HistogramForm.resx">
       <DependentUpon>HistogramForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -82,6 +99,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PasswordDinamicForm.resx">
       <DependentUpon>PasswordDinamicForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PressDurationChartForm.resx">
+      <DependentUpon>PressDurationChartForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SettingsForm.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

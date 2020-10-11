@@ -14,14 +14,19 @@ namespace Task1
         }
 
 
-        public double GetPasswordMathExpectasion(long[] passwordDurations)
+        public double GetPasswordsMathExpectasion(double[] passwordDurations)
         {
             return MathExpectation(passwordDurations);
         }
 
-        public double GetPasswordDispersion(long[] passwordDurations)
+        public double GetPasswordsDispersion(double[] passwordDurations)
         {
             return Dispersion(passwordDurations);
+        }
+
+        public double GetPasswordsSigma(double[] passwordDurations)
+        {
+            return Sigma(passwordDurations);
         }
         public double[] GetPasswordDurations(List<PasswordAction> passwordActions)//исправить long и int
         {
@@ -51,7 +56,27 @@ namespace Task1
             typedSymbols = passwordAction.GetTypedSymbols();
             return result;
         }
+        public double[] GetPressDuration(PasswordAction passwordAction, out string[] typedSymbols)
+        {
+            int n = passwordAction.SymbolActions.Count();
+            double[] result = new double[n];
+            for (int i = 0; i < n; i++)
+            {
+                result[i] = passwordAction.SymbolActions[i].KeyPressDuration;
+            }
+            typedSymbols = passwordAction.GetTypedSymbols();
+            return result;
+        }
 
+        public static double Sigma<T>(T[] values)
+        {
+            return Sigma(values.Cast<double>().ToArray());
+        }
+
+        public static double Sigma(double[] values)
+        {
+            return Math.Pow(Dispersion(values), (double)0.5);
+        }
         public static double Dispersion<T>(T[] values)
         {
             return Dispersion(values.Cast<double>().ToArray());

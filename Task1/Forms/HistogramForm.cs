@@ -45,7 +45,7 @@ namespace Task1
             histogramChart.Series.Last().Points.Clear();
             for (int i = 0; i < passwordsLengths.Length; i++)
             {
-                histogramChart.Series.Last().Points.AddY(TimeSpan.FromMilliseconds(passwordsLengths[i]).TotalSeconds);
+                histogramChart.Series.Last().Points.AddY(TimeSpanConverter.TotalSeconds(passwordsLengths[i]));
             }
         }
     }

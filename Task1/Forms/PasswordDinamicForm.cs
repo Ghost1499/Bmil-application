@@ -36,14 +36,14 @@ namespace Task1.Forms
         public void UpdateTypingDinamicLine()
         {
             string[] typedSymbols;
-            UpdateTypingDinamicLineFromData(mainForm.StatisticsManager.GetTypingDinamic(mainForm.PasswordActions.Last(), out typedSymbols), typedSymbols);
+            UpdateTypingDinamicLineFromData(mainForm.StatisticsManager.GetTypingDinamic(mainForm.PasswordAction, out typedSymbols), typedSymbols);
         }
         public void UpdateTypingDinamicLineFromData(double[] symbolsDinamic, string[] typedSymbols)
         {
             typingDinamicChart.Series.Last().Points.Clear();
             for (int i = 0; i < symbolsDinamic.Length; i++)
             {
-                typingDinamicChart.Series.Last().Points.AddXY(typedSymbols[i],TimeSpan.FromMilliseconds(symbolsDinamic[i]).TotalSeconds);
+                typingDinamicChart.Series.Last().Points.AddXY(typedSymbols[i],TimeSpanConverter.TotalSeconds(symbolsDinamic[i]));
             }
         }
     }

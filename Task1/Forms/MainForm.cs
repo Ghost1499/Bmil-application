@@ -21,10 +21,21 @@ namespace Task1
         List<PasswordAction> passwordActions;
         HistogramForm histogramForm;
         PasswordDinamicForm dinamicForm;
+        PressDurationChartForm pressDurationChartForm;
+        SettingsForm settingsForm;
 
         public StatisticsManager StatisticsManager { get => statisticsManager; set => statisticsManager = value; }
         public List<PasswordAction> PasswordActions { get => passwordActions; set => passwordActions = value; }
-        public PasswordAction PasswordAction { get => passwordActions.Last();  }
+        public PasswordAction PasswordAction {
+            get {
+                if (passwordActions.Count() > 0)
+                {
+                    return passwordActions.Last();
+                }
+                else return null;
+            } }
+
+        internal Settings Settings { get => settings; set => settings = value; }
 
         public MainForm()
         {
@@ -35,20 +46,43 @@ namespace Task1
             passwordActions = new List<PasswordAction>();
             Init();
 
-            double[] vals = new double[] { 1, 2, 3, 10 };
-            label1.Text = StatisticsManager.MathExpectation(vals).ToString();
-            label2.Text = StatisticsManager.Dispersion(vals).ToString();
+            //double[] vals = new double[] { 1, 2, 3, 10 };
+            //label1.Text = StatisticsManager.MathExpectation(vals).ToString();
+            //label2.Text = StatisticsManager.Dispersion(vals).ToString();
         }
 
         private void Init()
         {
-            samplePasswordLabel.Text = settings.Password;
             acceptPasswordButton.Select();
             InputLanguage.CurrentInputLanguage = InputLanguage.FromCulture(new System.Globalization.CultureInfo("en-US"));
+            UpdateLabels();
+        }
+        public void UpdateLabels()
+        {
+            samplePasswordLabel.Text = settings.Password;
+            passwordComplexetyLabel.Text = PasswordManager.CheckPasswordComplexity(settings.Password, settings.Alphabet).ToString();
+        }
+        private void UpdateValues()
+        {
+            if (histogramForm != null)
+            {
+                histogramForm.UpdateHistogram();
+
+            }
+            if (dinamicForm != null)
+            {
+                dinamicForm.Update();
+            }
+            if (pressDurationChartForm != null)
+            {
+                pressDurationChartForm.Update();
+            }
+            mathExpectationLabel.Text = TimeSpanConverter.TotalSeconds(statisticsManager.GetPasswordsMathExpectasion(statisticsManager.GetPasswordDurations(passwordActions))).ToString();
+            dispersionLabel.Text = statisticsManager.GetPasswordsDispersion(statisticsManager.GetPasswordDurations(passwordActions)).ToString();
+            sigmaLabel.Text = TimeSpanConverter.TotalSeconds(statisticsManager.GetPasswordsSigma(statisticsManager.GetPasswordDurations(passwordActions))).ToString();
+         
         }
 
-
-        
 
 
         private void AcceptPassword()
@@ -61,15 +95,7 @@ namespace Task1
                     return;
                 }
                 passwordActions.Add(inputController.EndPasswordAction(DateTime.Now, passwordTextBox.Text));
-                if (histogramForm != null)
-                {
-                    histogramForm.UpdateHistogram();
-
-                }
-                if (dinamicForm != null)
-                {
-                    dinamicForm.Update();
-                }
+                UpdateValues();
             }
             catch (InvalidPasswordException)
             {
@@ -79,8 +105,6 @@ namespace Task1
             catch (BaseException)
             {
             }
-            //label1.Text = statisticsManager.GetPasswordMathExpectasion(statisticsManager.GetPasswordDurations()).ToString();
-            //label2.Text = statisticsManager.GetPasswordDispersion(statisticsManager.GetPasswordDurations()).ToString();
         }
 
         private void StartTypingPassword(object sender, EventArgs e)
@@ -128,6 +152,19 @@ namespace Task1
             dinamicForm = new PasswordDinamicForm(this);
             dinamicForm.Show();
         }
+
+        private void keyPressDurationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            pressDurationChartForm = new PressDurationChartForm(this);
+            pressDurationChartForm.Show();
+        }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            settingsForm = new SettingsForm(this, settings);
+            settingsForm.Show();
+        }
+
 
 
         //private int PasswordAccepted()
