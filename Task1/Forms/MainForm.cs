@@ -22,6 +22,7 @@ namespace Task1
         HistogramForm histogramForm;
         PasswordDinamicForm dinamicForm;
         PressDurationChartForm pressDurationChartForm;
+        PasswordsDurattionsChartForm passwordsDurattionsChartForm;
         SettingsForm settingsForm;
 
         public StatisticsManager StatisticsManager { get => statisticsManager; set => statisticsManager = value; }
@@ -40,7 +41,8 @@ namespace Task1
         public MainForm()
         {
             InitializeComponent();
-            settings = new Settings("passWoRdtoTESt1882#!",PasswordManager.PasswordsAlphabets.А3);
+            settings = new Settings();
+            //settings = new Settings("passWoRdtoTESt1882",PasswordManager.PasswordsAlphabets.А3);
             inputController = new InputController();
             statisticsManager = new StatisticsManager();
             passwordActions = new List<PasswordAction>();
@@ -77,6 +79,10 @@ namespace Task1
             {
                 pressDurationChartForm.Update();
             }
+            if (passwordsDurattionsChartForm != null)
+            {
+                passwordsDurattionsChartForm.UpdateForm();
+            }
             mathExpectationLabel.Text = TimeSpanConverter.TotalSeconds(statisticsManager.GetPasswordsMathExpectasion(statisticsManager.GetPasswordDurations(passwordActions))).ToString();
             dispersionLabel.Text = statisticsManager.GetPasswordsDispersion(statisticsManager.GetPasswordDurations(passwordActions)).ToString();
             sigmaLabel.Text = TimeSpanConverter.TotalSeconds(statisticsManager.GetPasswordsSigma(statisticsManager.GetPasswordDurations(passwordActions))).ToString();
@@ -85,7 +91,7 @@ namespace Task1
 
 
 
-        private void AcceptPassword()
+        private void AcceptPassword()//сделать события
         {
             try
             {
@@ -163,6 +169,12 @@ namespace Task1
         {
             settingsForm = new SettingsForm(this, settings);
             settingsForm.Show();
+        }
+
+        private void passwordsDurationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            passwordsDurattionsChartForm = new PasswordsDurattionsChartForm(this);
+            passwordsDurattionsChartForm.Show();
         }
 
 
