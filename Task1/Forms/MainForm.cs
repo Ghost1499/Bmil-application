@@ -40,7 +40,7 @@ namespace Task1
         public MainForm()
         {
             InitializeComponent();
-            settings = new Settings();
+            settings = new Settings("passWoRdtoTESt1882#!",PasswordManager.PasswordsAlphabets.А3);
             inputController = new InputController();
             statisticsManager = new StatisticsManager();
             passwordActions = new List<PasswordAction>();

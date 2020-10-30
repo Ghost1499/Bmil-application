@@ -49,12 +49,12 @@ namespace Task1
         public int OverlaysCount { get => overlaysCount; set => overlaysCount = value; }
         public DateTime EndTime { get => endTime; set => endTime = value; }
 
-        public int GetPreseedKeyIndex(Keys keyCode)
+        public int GetPreseedKeyIndex(Keys keyCode,bool isShiftPressed)
         {
             int symbolActionIndex = -1;
             for (int i = 0; i < PressedKeys.Count(); i++)
             {
-                if (PressedKeys[i].KeyValue.Equals(keyCode))
+                if (PressedKeys[i].FeelEqualsByParams(keyCode,isShiftPressed))
                 {
                     symbolActionIndex = i;
 

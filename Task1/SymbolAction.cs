@@ -10,12 +10,14 @@ namespace Task1
     public class SymbolAction
     {
         private Keys keyValue;
+        private readonly bool isShiftPressed;
         private double keyDownTime;
         private double keyUpTime;
         private double overlayEndingTime;
-        public SymbolAction(Keys keyValue, double keyDownTime)
+        public SymbolAction(Keys keyValue,bool isShiftPressed, double keyDownTime)
         {
             this.keyValue = keyValue;
+            this.isShiftPressed = isShiftPressed;
             this.keyDownTime = keyDownTime;
             this.keyUpTime = 0;
             this.overlayEndingTime = keyDownTime;
@@ -42,9 +44,12 @@ namespace Task1
             if (obj.GetType() != this.GetType()) return false;
 
             SymbolAction symbolAction = (SymbolAction)obj;
-            return this.keyValue.Equals(symbolAction.keyValue);
+            return this.keyValue.Equals(symbolAction.keyValue)&&(this.isShiftPressed==symbolAction.isShiftPressed);
         }
-
+        public bool FeelEqualsByParams(Keys keyCode,bool isShiftPressed)
+        {
+            return (KeyValue == keyCode); /*&& (this.isShiftPressed == isShiftPressed);*/
+        }
         //private static void DoubleCompare(double val1,double val2)
         //{
         //    if(Math.Abs(val1-val2)>Double.Epsilon)

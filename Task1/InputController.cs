@@ -21,6 +21,14 @@ namespace Task1
             //passwordActions = new List<PasswordAction>();
         }
 
+        private void UnpressPressedKeys(DateTime endTime)
+        {
+            for (int i = 0; i < PasswordAction.PressedKeys.Count(); i++)
+            {
+                KeyUp(new KeyEventArgs(PasswordAction.PressedKeys[i].KeyValue), endTime);
+            }
+
+        }
         public void NextPasswordAction(string password,DateTime startTime)
         {
             passwordAction =new PasswordAction(password, startTime);
@@ -32,10 +40,7 @@ namespace Task1
             {
                 throw new InvalidPasswordException("Invalid password exception");
             }
-            for (int i = 0; i < PasswordAction.PressedKeys.Count(); i++)
-            {
-                KeyUp(new KeyEventArgs(PasswordAction.PressedKeys[i].KeyValue), endTime);
-            }
+            UnpressPressedKeys(endTime);
             PasswordAction.EndTime = endTime;
             PasswordAction oldPasswordAction = this.passwordAction;
             this.passwordAction = null;
@@ -43,8 +48,11 @@ namespace Task1
         }
         public void KeyDown(KeyEventArgs keyEventArgs, DateTime worldTime)
         {
-            //if(ke)
-            SymbolAction symbolAction = new SymbolAction(keyEventArgs.KeyCode, PasswordAction.GetRelativeTime(worldTime));
+            if (keyEventArgs.KeyCode == Keys.ShiftKey || keyEventArgs.KeyCode==Keys.Control)
+            {
+                return;
+            }
+            SymbolAction symbolAction = new SymbolAction(keyEventArgs.KeyCode,keyEventArgs.Shift, PasswordAction.GetRelativeTime(worldTime));
             PasswordAction.SymbolActions.Add(symbolAction);
             PasswordAction.PressedKeys.Add(symbolAction);
             if (PasswordAction.PressedKeys.Count > 1)
@@ -57,7 +65,7 @@ namespace Task1
         public void KeyUp(KeyEventArgs keyEventArgs, DateTime worldTime)
         {
 
-            int symbolActionIndex= PasswordAction.GetPreseedKeyIndex(keyEventArgs.KeyCode);
+            int symbolActionIndex= PasswordAction.GetPreseedKeyIndex(keyEventArgs.KeyCode,keyEventArgs.Shift);
             if (symbolActionIndex!=-1)
             {
                 SymbolAction symbolAction = PasswordAction.PressedKeys[symbolActionIndex];
