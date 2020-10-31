@@ -14,10 +14,15 @@ namespace Task1
     public partial class HistogramForm : Form
     {
         MainForm mainForm;
-        public HistogramForm(MainForm mainForm)
+
+        public StatisticsManager Statistics { get; set; }
+
+        public HistogramForm(MainForm mainForm,StatisticsManager statistics)
         {
             InitializeComponent();
             this.mainForm = mainForm;
+            Statistics = statistics;
+            mainForm.PasswordsUpdate += UpdateHistogram;
            
             InitHistogram();
         }
@@ -37,7 +42,7 @@ namespace Task1
 
         public void UpdateHistogram()
         {
-            UpdateHistogramByData(mainForm.StatisticsManager.GetPasswordDurations(mainForm.PasswordActions));
+            UpdateHistogramByData(Statistics.GetPasswordDurations(mainForm.PasswordActions));
 
         }
         public void UpdateHistogramByData(double[] passwordsLengths)

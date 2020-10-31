@@ -8,9 +8,17 @@ namespace Task1
 {
     public class StatisticsManager
     {
-        public StatisticsManager()
+        public List<PasswordAction> PasswordActions { get; set; }
+        public PasswordAction PasswordAction { get { return PasswordActions.Last(); } }
+
+        public StatisticsManager(List<PasswordAction> passwordActions)
         {
-           
+            if (passwordActions == null)
+            {
+                throw new ArgumentNullException(nameof(passwordActions));
+            }
+
+            PasswordActions = passwordActions;
         }
 
 

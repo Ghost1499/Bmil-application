@@ -11,10 +11,12 @@ namespace Task1
     {
         PasswordActionContext database;
         public List<PasswordAction> PasswordActions { get; protected set; }
+        public PasswordAction PasswordAction { get { return PasswordActions.Last(); } }
 
         public PasswordManager()
         {
             database = new PasswordActionContext();
+            database.PasswordActions.Load();
             UpdatePasswordAtions();
         }
 
@@ -25,7 +27,6 @@ namespace Task1
 
         protected void UpdatePasswordAtions()
         {
-            database.PasswordActions.Load();
             PasswordActions = database.PasswordActions.Local.ToList();
         }
         public void InsertPasswordAction(PasswordAction passwordAction)

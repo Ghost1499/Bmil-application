@@ -48,6 +48,7 @@ namespace Task1.Forms
         {
             InitializeComponent();
             this.mainForm = mainForm;
+            mainForm.PasswordsUpdate += UpdateForm;
             Init();
         }
 
@@ -55,14 +56,14 @@ namespace Task1.Forms
         {
             InitTypingDinamicLine();
         }
-        public void Update()
+        public void UpdateForm()
         {
             UpdateTypingDinamicLine();
             //overlaysCountLabel.Text = mainForm.PasswordAction.OverlaysCount.ToString();
         }
         private void InitTypingDinamicLine()
         {
-            Update();
+            UpdateForm();
         }
         public void UpdateTypingDinamicLine()
         {
