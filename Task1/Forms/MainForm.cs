@@ -37,15 +37,18 @@ namespace Task1
             } }
 
         internal Settings Settings { get => settings; set => settings = value; }
+        public PasswordManager PasswordManager { get; set; }
 
         public MainForm()
         {
             InitializeComponent();
+            PasswordManager = new PasswordManager();
+            passwordActions = PasswordManager.PasswordActions;
             settings = new Settings();
             //settings = new Settings("passWoRdtoTESt1882",PasswordManager.PasswordsAlphabets.А3);
             inputController = new InputController();
             statisticsManager = new StatisticsManager();
-            passwordActions = new List<PasswordAction>();
+            //passwordActions = new List<PasswordAction>();
             Init();
 
             //double[] vals = new double[] { 1, 2, 3, 10 };

@@ -4,50 +4,68 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Data.Entity;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Task1
 {
     public class PasswordAction
     {
-        private readonly string validPassword;
-        private readonly DateTime startTime;
-        private DateTime endTime;
-        //private int time;
-        private int overlaysCount;
         private List<SymbolAction> symbolActions;
         private List<SymbolAction> pressedKeys;
 
-        public PasswordAction(string validPassword, DateTime startTime)
+        [Key]
+        public int Id { get; set; }
+        public string ValidPassword { get; set; }
+
+        [NotMapped]
+        public double TimeDuration
         {
-            if (string.IsNullOrEmpty(validPassword))
+            get
             {
-                throw new ArgumentException("message", nameof(validPassword));
+                TimeSpan duration = this.EndTime - this.StartTime;
+                return duration.TotalMilliseconds;
             }
+        }
+        [Required]
+        public DateTime StartTime { get; set; }
+
+        [NotMapped]
+        public List<SymbolAction> SymbolActions { get => symbolActions; set => symbolActions = value; }
+
+        [NotMapped]
+        public List<SymbolAction> PressedKeys { get => pressedKeys; set => pressedKeys = value; }
+
+        public int OverlaysCount { get; set; }
+
+        [Required]
+        public DateTime EndTime { get; set; }
+
+
+        public PasswordAction()
+        {
             this.symbolActions = new List<SymbolAction>();
             this.pressedKeys = new List<SymbolAction>();
-            this.validPassword = validPassword;
-            this.startTime = startTime;
-            this.endTime = this.startTime;
-            //this.time = 0;
-            this.overlaysCount = 0;
+            this.OverlaysCount = 0;
+
         }
+        //public PasswordAction(string validPassword, DateTime startTime)
+        //{
+        //    if (string.IsNullOrEmpty(validPassword))
+        //    {
+        //        throw new ArgumentException("message", nameof(validPassword));
+        //    }
+        //    this.symbolActions = new List<SymbolAction>();
+        //    this.pressedKeys = new List<SymbolAction>();
+        //    this.ValidPassword = validPassword;
+        //    this.StartTime = startTime;
+        //    this.EndTime = this.StartTime;
+        //    //this.time = 0;
+        //    this.OverlaysCount = 0;
+        //}
 
-        public string ValidPassword => validPassword;
 
-
-        public double TimeDuration {
-            get {
-                TimeSpan duration = this.endTime - this.startTime;
-                return duration.TotalMilliseconds;
-            } }
-
-        public DateTime StartTime => startTime;
-
-        internal List<SymbolAction> SymbolActions { get => symbolActions; set => symbolActions = value; }
-        internal List<SymbolAction> PressedKeys { get => pressedKeys; set => pressedKeys = value; }
-        public int OverlaysCount { get => overlaysCount; set => overlaysCount = value; }
-        public DateTime EndTime { get => endTime; set => endTime = value; }
 
         public int GetPreseedKeyIndex(Keys keyCode,bool isShiftPressed)
         {
@@ -72,7 +90,7 @@ namespace Task1
 
         public double GetRelativeTime(DateTime dateTime)
         {
-            TimeSpan time= dateTime - this.startTime;
+            TimeSpan time= dateTime - this.StartTime;
             return time.TotalMilliseconds;
         }
 

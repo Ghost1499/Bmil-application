@@ -10,14 +10,13 @@ namespace Task1
 {
     class InputController
     {
-        //private List<PasswordAction> passwordActions;
-        private PasswordAction passwordAction;
-
-        public PasswordAction PasswordAction { get => passwordAction;}
+        protected PasswordActionBuilder PasswordActionBuilder { get; set; }
+        public PasswordAction PasswordAction { get; private set; }
         //public List<PasswordAction> PasswordActions { get => passwordActions; set => passwordActions = value; }
 
         public InputController()
         {
+            PasswordActionBuilder = new PasswordActionBuilder();
             //passwordActions = new List<PasswordAction>();
         }
 
@@ -31,7 +30,7 @@ namespace Task1
         }
         public void NextPasswordAction(string password,DateTime startTime)
         {
-            passwordAction =new PasswordAction(password, startTime);
+            PasswordAction = PasswordActionBuilder.ConstructPasswordAction(password, startTime);
         }
 
         public PasswordAction EndPasswordAction(DateTime endTime,string passwordValue)
@@ -42,8 +41,8 @@ namespace Task1
             }
             UnpressPressedKeys(endTime);
             PasswordAction.EndTime = endTime;
-            PasswordAction oldPasswordAction = this.passwordAction;
-            this.passwordAction = null;
+            PasswordAction oldPasswordAction = this.PasswordAction;
+            this.PasswordAction = null;
             return oldPasswordAction;
         }
         public void KeyDown(KeyEventArgs keyEventArgs, DateTime worldTime)
