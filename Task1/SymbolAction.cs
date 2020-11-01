@@ -4,47 +4,67 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.Entity;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 
 namespace Task1
 {
     public class SymbolAction
     {
-        private Keys keyValue;
-        private readonly bool isShiftPressed;
-        private double keyDownTime;
-        private double keyUpTime;
         private double overlayEndingTime;
+        public SymbolAction()
+        {
+            Init((Keys)0, false, 0);
+        }
         public SymbolAction(Keys keyValue,bool isShiftPressed, double keyDownTime)
         {
-            this.keyValue = keyValue;
-            this.isShiftPressed = isShiftPressed;
-            this.keyDownTime = keyDownTime;
-            this.keyUpTime = 0;
+            Init(keyValue, isShiftPressed, keyDownTime);
+        }
+        private void Init(Keys keyValue, bool isShiftPressed, double keyDownTime)
+        {
+            this.KeyValue = keyValue;
+            this.IsShiftPressed = isShiftPressed;
+            this.KeyDownTime = keyDownTime;
+            this.KeyUpTime = 0;
             this.overlayEndingTime = keyDownTime;
         }
 
-        public Keys KeyValue { get => keyValue; set => keyValue = value; }
-        public double KeyDownTime { get => keyDownTime; set => keyDownTime = value; }
-        public double KeyUpTime { get => keyUpTime; set => keyUpTime = value; }
+        [Key]
+        public int Id { get; set; }
+
+        public int PasswordActionId { get; set; }
+        [Required]
+        public Keys KeyValue { get; set; }
+        [Required]
+        public double KeyDownTime { get; set; }
+        [Required]
+        public double KeyUpTime { get; set; }
+        [NotMapped]
         public double KeyPressDuration
         {
             get
             {
-                if (Math.Abs(keyUpTime )> Double.Epsilon)
+                if (Math.Abs(KeyUpTime )> Double.Epsilon)
                 {
-                    return keyUpTime - keyDownTime;
+                    return KeyUpTime - KeyDownTime;
                 }
                 else { return 0; }
             }
         }
-        public double OverlayEndingTime { get => overlayEndingTime; set { if ( value > overlayEndingTime) { overlayEndingTime = value; }; } }
-        public double OverlayDuration { get => overlayEndingTime - keyDownTime; }
+        public double OverlayEndingTime { get => overlayEndingTime; set { if (value > overlayEndingTime) overlayEndingTime = value; } }
+
+        [NotMapped]
+        public double OverlayDuration { get => overlayEndingTime - KeyDownTime; }
+        public bool IsShiftPressed { get; set; }
+
         public override bool Equals(object obj)
         {
             if (obj.GetType() != this.GetType()) return false;
 
             SymbolAction symbolAction = (SymbolAction)obj;
-            return this.keyValue.Equals(symbolAction.keyValue)&&(this.isShiftPressed==symbolAction.isShiftPressed);
+            return this.KeyValue.Equals(symbolAction.KeyValue)&&(this.IsShiftPressed==symbolAction.IsShiftPressed);
         }
         public bool FeelEqualsByParams(Keys keyCode,bool isShiftPressed)
         {

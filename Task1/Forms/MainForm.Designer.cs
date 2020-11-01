@@ -33,9 +33,9 @@
             this.samplePasswordLabel = new System.Windows.Forms.Label();
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.статистикаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.histogramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.passwordDinamicToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.keyPressDurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.passwordsDurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.typingDimanicToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.passwordKeyPressDurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.passwordComplexetyLabel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -45,7 +45,6 @@
             this.mathExpectationLabel = new System.Windows.Forms.Label();
             this.dispersionLabel = new System.Windows.Forms.Label();
             this.sigmaLabel = new System.Windows.Forms.Label();
-            this.passwordsDurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -95,34 +94,33 @@
             // статистикаToolStripMenuItem
             // 
             this.статистикаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.histogramToolStripMenuItem,
-            this.passwordDinamicToolStripMenuItem,
-            this.keyPressDurationToolStripMenuItem,
-            this.passwordsDurationToolStripMenuItem});
+            this.passwordsDurationToolStripMenuItem,
+            this.typingDimanicToolStripMenuItem,
+            this.passwordKeyPressDurationToolStripMenuItem});
             this.статистикаToolStripMenuItem.Name = "статистикаToolStripMenuItem";
             this.статистикаToolStripMenuItem.Size = new System.Drawing.Size(111, 29);
             this.статистикаToolStripMenuItem.Text = "Статистика";
             // 
-            // histogramToolStripMenuItem
+            // passwordsDurationToolStripMenuItem
             // 
-            this.histogramToolStripMenuItem.Name = "histogramToolStripMenuItem";
-            this.histogramToolStripMenuItem.Size = new System.Drawing.Size(344, 30);
-            this.histogramToolStripMenuItem.Text = "Статистика вводов";
-            this.histogramToolStripMenuItem.Click += new System.EventHandler(this.histogramToolStripMenuItem_Click);
+            this.passwordsDurationToolStripMenuItem.Name = "passwordsDurationToolStripMenuItem";
+            this.passwordsDurationToolStripMenuItem.Size = new System.Drawing.Size(344, 30);
+            this.passwordsDurationToolStripMenuItem.Text = "Статистика вводов";
+            this.passwordsDurationToolStripMenuItem.Click += new System.EventHandler(this.passwordsDurationToolStripMenuItem_Click);
             // 
-            // passwordDinamicToolStripMenuItem
+            // typingDimanicToolStripMenuItem
             // 
-            this.passwordDinamicToolStripMenuItem.Name = "passwordDinamicToolStripMenuItem";
-            this.passwordDinamicToolStripMenuItem.Size = new System.Drawing.Size(344, 30);
-            this.passwordDinamicToolStripMenuItem.Text = "Динамика ввода";
-            this.passwordDinamicToolStripMenuItem.Click += new System.EventHandler(this.passwordDinamicToolStripMenuItem_Click);
+            this.typingDimanicToolStripMenuItem.Name = "typingDimanicToolStripMenuItem";
+            this.typingDimanicToolStripMenuItem.Size = new System.Drawing.Size(344, 30);
+            this.typingDimanicToolStripMenuItem.Text = "Динамика ввода";
+            this.typingDimanicToolStripMenuItem.Click += new System.EventHandler(this.typingDimanicToolStripMenuItem_Click);
             // 
-            // keyPressDurationToolStripMenuItem
+            // passwordKeyPressDurationToolStripMenuItem
             // 
-            this.keyPressDurationToolStripMenuItem.Name = "keyPressDurationToolStripMenuItem";
-            this.keyPressDurationToolStripMenuItem.Size = new System.Drawing.Size(344, 30);
-            this.keyPressDurationToolStripMenuItem.Text = "Длительность нажатия клавиш";
-            this.keyPressDurationToolStripMenuItem.Click += new System.EventHandler(this.keyPressDurationToolStripMenuItem_Click);
+            this.passwordKeyPressDurationToolStripMenuItem.Name = "passwordKeyPressDurationToolStripMenuItem";
+            this.passwordKeyPressDurationToolStripMenuItem.Size = new System.Drawing.Size(344, 30);
+            this.passwordKeyPressDurationToolStripMenuItem.Text = "Длительность нажатия клавиш";
+            this.passwordKeyPressDurationToolStripMenuItem.Click += new System.EventHandler(this.passwordKeyPressDurationToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
@@ -211,13 +209,6 @@
             this.sigmaLabel.TabIndex = 17;
             this.sigmaLabel.Text = "None";
             // 
-            // passwordsDurationToolStripMenuItem
-            // 
-            this.passwordsDurationToolStripMenuItem.Name = "passwordsDurationToolStripMenuItem";
-            this.passwordsDurationToolStripMenuItem.Size = new System.Drawing.Size(344, 30);
-            this.passwordsDurationToolStripMenuItem.Text = "Длительность паролей";
-            this.passwordsDurationToolStripMenuItem.Click += new System.EventHandler(this.passwordsDurationToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -252,8 +243,6 @@
         private System.Windows.Forms.Label samplePasswordLabel;
         private System.Windows.Forms.MenuStrip mainMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem статистикаToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem histogramToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem passwordDinamicToolStripMenuItem;
         private System.Windows.Forms.Label passwordComplexetyLabel;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
@@ -262,9 +251,10 @@
         private System.Windows.Forms.Label mathExpectationLabel;
         private System.Windows.Forms.Label dispersionLabel;
         private System.Windows.Forms.Label sigmaLabel;
-        private System.Windows.Forms.ToolStripMenuItem keyPressDurationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem passwordsDurationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem typingDimanicToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem passwordKeyPressDurationToolStripMenuItem;
     }
 }
 

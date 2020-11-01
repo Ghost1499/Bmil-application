@@ -16,7 +16,7 @@ namespace Task1
         public PasswordManager()
         {
             database = new PasswordActionContext();
-            database.PasswordActions.Load();
+            //database.PasswordActions.Load();
             UpdatePasswordAtions();
         }
 
@@ -27,7 +27,7 @@ namespace Task1
 
         protected void UpdatePasswordAtions()
         {
-            PasswordActions = database.PasswordActions.Local.ToList();
+            PasswordActions = database.PasswordActions.Include(passAct=> passAct.SymbolActions).ToList();
         }
         public void InsertPasswordAction(PasswordAction passwordAction)
         {

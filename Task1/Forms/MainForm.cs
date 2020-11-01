@@ -17,19 +17,20 @@ namespace Task1
     {
         InputController inputController;
         Settings settings;
-        StatisticsManager statisticsManager;
-        HistogramForm histogramForm;
-        PasswordDinamicForm dinamicForm;
-        PressDurationChartForm pressDurationChartForm;
+        Statistics statistics;
+        //HistogramForm histogramForm;
+        //PasswordDinamicForm dinamicForm;
+        //PressDurationChartForm pressDurationChartForm;
         PasswordsDurattionsChartForm passwordsDurattionsChartForm;
         SettingsForm settingsForm;
 
         public delegate void UpdatePasswordsHandler();
         public event UpdatePasswordsHandler PasswordsUpdate;
 
-        public StatisticsManager StatisticsManager { get => statisticsManager; set => statisticsManager = value; }
-        public List<PasswordAction> PasswordActions { get { return PasswordManager.PasswordActions; } }
-        public PasswordAction PasswordAction { get { return PasswordManager.PasswordAction; } }
+        public Statistics StatisticsManager { get => statistics; set => statistics = value; }
+
+        public List<PasswordAction> PasswordActions => PasswordManager.PasswordActions;
+        public PasswordAction PasswordAction { get { return PasswordActions.Last(); } }
 
         //public PasswordAction PasswordAction {
         //    get {
@@ -51,7 +52,7 @@ namespace Task1
             settings = new Settings();
             //settings = new Settings("passWoRdtoTESt1882",PasswordManager.PasswordsAlphabets.А3);
             inputController = new InputController();
-            statisticsManager = new StatisticsManager(PasswordActions);
+            statistics = new Statistics(PasswordManager);
             //passwordActions = new List<PasswordAction>();
             Init();
 
@@ -90,9 +91,9 @@ namespace Task1
             //{
             //    passwordsDurattionsChartForm.UpdateForm();
             //}
-            mathExpectationLabel.Text = TimeSpanConverter.TotalSeconds(statisticsManager.GetPasswordsMathExpectasion(statisticsManager.GetPasswordDurations(PasswordActions))).ToString();
-            dispersionLabel.Text = statisticsManager.GetPasswordsDispersion(statisticsManager.GetPasswordDurations(PasswordActions)).ToString();
-            sigmaLabel.Text = TimeSpanConverter.TotalSeconds(statisticsManager.GetPasswordsSigma(statisticsManager.GetPasswordDurations(PasswordActions))).ToString();
+            mathExpectationLabel.Text = TimeSpanConverter.TotalSeconds(statistics.GetPasswordsMathExpectasion()).ToString();
+            dispersionLabel.Text = statistics.GetPasswordsDispersion().ToString();
+            sigmaLabel.Text = TimeSpanConverter.TotalSeconds(statistics.GetPasswordsSigma()).ToString();
          
         }
 
@@ -157,23 +158,23 @@ namespace Task1
             inputController.KeyUp(e, DateTime.Now);
         }
 
-        private void histogramToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            histogramForm = new HistogramForm(this,StatisticsManager);
-            histogramForm.Show();
-        }
+        //private void histogramToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    histogramForm = new HistogramForm(this,StatisticsManager);
+        //    histogramForm.Show();
+        //}
 
-        private void passwordDinamicToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            dinamicForm = new PasswordDinamicForm(this);
-            dinamicForm.Show();
-        }
+        //private void passwordDinamicToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    dinamicForm = new PasswordDinamicForm(this);
+        //    dinamicForm.Show();
+        //}
 
-        private void keyPressDurationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            pressDurationChartForm = new PressDurationChartForm(this);
-            pressDurationChartForm.Show();
-        }
+        //private void keyPressDurationToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    pressDurationChartForm = new PressDurationChartForm(this);
+        //    pressDurationChartForm.Show();
+        //}
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -183,8 +184,20 @@ namespace Task1
 
         private void passwordsDurationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            passwordsDurattionsChartForm = new PasswordsDurattionsChartForm(this);
+            passwordsDurattionsChartForm = new PasswordsDurattionsChartForm(this,StatisticsManager);
             passwordsDurattionsChartForm.Show();
+        }
+
+        private void typingDimanicToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TypingDinamicChartForm typingDinamicChartForm= new TypingDinamicChartForm(this,statistics);
+            typingDinamicChartForm.Show();
+        }
+
+        private void passwordKeyPressDurationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            KeysPressDurationChartForm keysPressDurationChartForm = new KeysPressDurationChartForm(this, statistics);
+            keysPressDurationChartForm.Show();
         }
 
 

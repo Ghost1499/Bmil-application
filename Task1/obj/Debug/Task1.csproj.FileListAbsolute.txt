@@ -8,9 +8,6 @@ C:\CSF\programming\programs\BMIL\Task1\Task1\obj\Debug\Task1.csproj.GenerateReso
 C:\CSF\programming\programs\BMIL\Task1\Task1\obj\Debug\Task1.csproj.CoreCompileInputs.cache
 C:\CSF\programming\programs\BMIL\Task1\Task1\obj\Debug\Task1.exe
 C:\CSF\programming\programs\BMIL\Task1\Task1\obj\Debug\Task1.pdb
-C:\CSF\programming\programs\BMIL\Task1\Task1\obj\Debug\Task1.HistogramForm.resources
-C:\CSF\programming\programs\BMIL\Task1\Task1\obj\Debug\Task1.Forms.PasswordDinamicForm.resources
-C:\CSF\programming\programs\BMIL\Task1\Task1\obj\Debug\Task1.Forms.PressDurationChartForm.resources
 C:\CSF\programming\programs\BMIL\Task1\Task1\obj\Debug\Task1.Forms.SettingsForm.resources
 C:\CSF\programming\programs\BMIL\Task1\Task1\obj\Debug\Task1.Forms.ChartForm.resources
 C:\CSF\programming\programs\BMIL\Task1\Task1\bin\Debug\EntityFramework.dll
@@ -20,3 +17,4 @@ C:\CSF\programming\programs\BMIL\Task1\Task1\bin\Debug\EntityFramework.SqlServer
 C:\CSF\programming\programs\BMIL\Task1\Task1\obj\Debug\Task1.csproj.CopyComplete
 C:\CSF\programming\programs\BMIL\Task1\Task1\obj\Debug\Task1.Migrations.InitialCreate.resources
 C:\CSF\programming\programs\BMIL\Task1\Task1\obj\Debug\Task1.Migrations.PasswordActionMigration.resources
+C:\CSF\programming\programs\BMIL\Task1\Task1\obj\Debug\Task1.Migrations.AddSymbolActionMigration.resources

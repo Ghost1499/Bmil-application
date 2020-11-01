@@ -65,17 +65,11 @@
     <Compile Include="Forms\ChartForm.Designer.cs">
       <DependentUpon>ChartForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\HistogramForm.cs">
+    <Compile Include="Forms\KeysPressDurationChartForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\HistogramForm.Designer.cs">
-      <DependentUpon>HistogramForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\PasswordDinamicForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\PasswordDinamicForm.Designer.cs">
-      <DependentUpon>PasswordDinamicForm.cs</DependentUpon>
+    <Compile Include="Forms\KeysPressDurationChartForm.Designer.cs">
+      <DependentUpon>KeysPressDurationChartForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\PasswordsDurattionsChartForm.cs">
       <SubType>Form</SubType>
@@ -83,17 +77,17 @@
     <Compile Include="Forms\PasswordsDurattionsChartForm.Designer.cs">
       <DependentUpon>PasswordsDurattionsChartForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\PressDurationChartForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\PressDurationChartForm.Designer.cs">
-      <DependentUpon>PressDurationChartForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TypingDinamicChartForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TypingDinamicChartForm.Designer.cs">
+      <DependentUpon>TypingDinamicChartForm.cs</DependentUpon>
     </Compile>
     <Compile Include="InputController.cs" />
     <Compile Include="Forms\MainForm.cs">
@@ -102,6 +96,8 @@
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="IUpdatable.cs" />
+    <Compile Include="LabelController.cs" />
     <Compile Include="Migrations\202010311410088_InitialCreate.cs" />
     <Compile Include="Migrations\202010311410088_InitialCreate.designer.cs">
       <DependentUpon>202010311410088_InitialCreate.cs</DependentUpon>
@@ -109,6 +105,10 @@
     <Compile Include="Migrations\202010311455237_PasswordActionMigration.cs" />
     <Compile Include="Migrations\202010311455237_PasswordActionMigration.designer.cs">
       <DependentUpon>202010311455237_PasswordActionMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011011520416_AddSymbolActionMigration.cs" />
+    <Compile Include="Migrations\202011011520416_AddSymbolActionMigration.designer.cs">
+      <DependentUpon>202011011520416_AddSymbolActionMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PasswordAction.cs" />
@@ -118,23 +118,14 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="StatisticsManager.cs" />
+    <Compile Include="Statistics.cs" />
     <Compile Include="SymbolAction.cs" />
     <Compile Include="TimeSpanConverter.cs" />
     <EmbeddedResource Include="Forms\ChartForm.resx">
       <DependentUpon>ChartForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\HistogramForm.resx">
-      <DependentUpon>HistogramForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PasswordDinamicForm.resx">
-      <DependentUpon>PasswordDinamicForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PressDurationChartForm.resx">
-      <DependentUpon>PressDurationChartForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
@@ -144,6 +135,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010311455237_PasswordActionMigration.resx">
       <DependentUpon>202010311455237_PasswordActionMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011011520416_AddSymbolActionMigration.resx">
+      <DependentUpon>202011011520416_AddSymbolActionMigration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

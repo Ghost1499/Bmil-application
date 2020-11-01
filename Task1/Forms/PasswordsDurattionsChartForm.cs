@@ -12,7 +12,7 @@ namespace Task1.Forms
 {
     public partial class PasswordsDurattionsChartForm : Task1.Forms.ChartForm
     {
-        public PasswordsDurattionsChartForm(MainForm mainForm):base(mainForm)
+        public PasswordsDurattionsChartForm(MainForm mainForm,Statistics statistics):base(mainForm,statistics)
         {
             InitializeComponent();
         }
@@ -24,7 +24,13 @@ namespace Task1.Forms
             LastSeries.ChartType = SeriesChartType.Column;
 
         }
-
+        protected override void InitLabelsGroupBox()
+        {
+            base.InitLabelsGroupBox();
+            LabelControllers.Add(new LabelController("Математическое ожидание", Statistics.GetPasswordsMathExpectasion, layoutPanel));
+            LabelControllers.Add(new LabelController("Дисперсия в миллискундах", Statistics.GetPasswordsDispersion, layoutPanel));
+            LabelControllers.Add(new LabelController("Среднеквадратическое отклонение", Statistics.GetPasswordsSigma, layoutPanel));
+        }
         protected override void UpdateChart()
         {
             double[] yValues = mainForm.StatisticsManager.GetPasswordDurations(mainForm.PasswordActions);

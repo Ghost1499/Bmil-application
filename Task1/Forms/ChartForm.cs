@@ -13,24 +13,38 @@ namespace Task1.Forms
 {
     public abstract partial class ChartForm : Form
     {
+        protected FlowLayoutPanel layoutPanel;
+        protected Chart chart;
+
         protected MainForm mainForm;
         //public delegate void dataSenderFunc<T>(out T[] xValues, out double[] yValues);
         protected Series LastSeries
         {
             get
             {
-                return mainChart.Series.Last();
+                return chart.Series.Last();
             }
         }
         protected SeriesCollection Series
         {
-            get { return mainChart.Series; }
+            get { return chart.Series; }
         }
 
-        public ChartForm(MainForm mainForm)
+        public Statistics Statistics { get; set; }
+        protected List<IUpdatable> LabelControllers { get; set; }
+
+
+        public ChartForm(MainForm mainForm, Statistics statistics)
         {
             InitializeComponent();
+            chart = mainChart;
+            layoutPanel = mainFlowLayoutPanel;
+
             this.mainForm = mainForm;
+            mainForm.PasswordsUpdate += UpdateForm;
+            Statistics = statistics;
+            
+            LabelControllers = new List<IUpdatable>();
             Init();
         }
 
@@ -108,7 +122,10 @@ namespace Task1.Forms
 
         protected virtual void UpdateLablesGroupBox()
         {
-            
+            foreach (IUpdatable labelController in LabelControllers)
+            {
+                labelController.Update();
+            }
         }
 
     }

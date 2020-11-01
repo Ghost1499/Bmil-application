@@ -15,9 +15,9 @@ namespace Task1
     {
         MainForm mainForm;
 
-        public StatisticsManager Statistics { get; set; }
+        public Statistics Statistics { get; set; }
 
-        public HistogramForm(MainForm mainForm,StatisticsManager statistics)
+        public HistogramForm(MainForm mainForm,Statistics statistics)
         {
             InitializeComponent();
             this.mainForm = mainForm;

@@ -68,7 +68,9 @@ namespace Task1.Forms
         public void UpdateTypingDinamicLine()
         {
             string[] typedSymbols;
-            UpdateTypingDinamicLineFromData(mainForm.StatisticsManager.GetPressDuration(mainForm.PasswordAction, out typedSymbols), typedSymbols);
+            double[] result;
+            mainForm.StatisticsManager.GetKeysPressDuration(out typedSymbols, out result);
+            UpdateTypingDinamicLineFromData(result, typedSymbols);
         }
         public void UpdateTypingDinamicLineFromData(double[] symbolsDinamic, string[] typedSymbols)
         {

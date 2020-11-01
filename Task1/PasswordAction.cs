@@ -31,7 +31,6 @@ namespace Task1
         [Required]
         public DateTime StartTime { get; set; }
 
-        [NotMapped]
         public List<SymbolAction> SymbolActions { get => symbolActions; set => symbolActions = value; }
 
         [NotMapped]
