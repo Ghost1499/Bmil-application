@@ -30,6 +30,7 @@ namespace Task1
         {
             Label.AutoSize = true;
             Label.Font = new System.Drawing.Font(Label.Font.Name, 12);
+            Label.Margin = new Padding(10);
         }
         public void Update()
         {
@@ -38,7 +39,7 @@ namespace Task1
 
         private string Format(double value)
         {
-            return sampleText + " : " + Math.Round(value).ToString();
+            return sampleText + " : " + Math.Round(value,4).ToString();
         }
     }
 }

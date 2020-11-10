@@ -88,6 +88,7 @@
             this.Controls.Add(this.mainChart);
             this.Name = "ChartForm";
             this.Text = "ChartForm";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ChartForm_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.mainChart)).EndInit();
             this.ResumeLayout(false);
 

@@ -45,6 +45,7 @@
             this.mathExpectationLabel = new System.Windows.Forms.Label();
             this.dispersionLabel = new System.Windows.Forms.Label();
             this.sigmaLabel = new System.Windows.Forms.Label();
+            this.passwordsVelocityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -96,7 +97,8 @@
             this.статистикаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.passwordsDurationToolStripMenuItem,
             this.typingDimanicToolStripMenuItem,
-            this.passwordKeyPressDurationToolStripMenuItem});
+            this.passwordKeyPressDurationToolStripMenuItem,
+            this.passwordsVelocityToolStripMenuItem});
             this.статистикаToolStripMenuItem.Name = "статистикаToolStripMenuItem";
             this.статистикаToolStripMenuItem.Size = new System.Drawing.Size(111, 29);
             this.статистикаToolStripMenuItem.Text = "Статистика";
@@ -209,6 +211,13 @@
             this.sigmaLabel.TabIndex = 17;
             this.sigmaLabel.Text = "None";
             // 
+            // passwordsVelocityToolStripMenuItem
+            // 
+            this.passwordsVelocityToolStripMenuItem.Name = "passwordsVelocityToolStripMenuItem";
+            this.passwordsVelocityToolStripMenuItem.Size = new System.Drawing.Size(344, 30);
+            this.passwordsVelocityToolStripMenuItem.Text = "Скорость ввода паролей";
+            this.passwordsVelocityToolStripMenuItem.Click += new System.EventHandler(this.passwordsVelocityToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -255,6 +264,7 @@
         private System.Windows.Forms.ToolStripMenuItem passwordsDurationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem typingDimanicToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem passwordKeyPressDurationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem passwordsVelocityToolStripMenuItem;
     }
 }
 

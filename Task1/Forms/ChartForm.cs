@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using Task1.StatisticsInterfaces;
 
 namespace Task1.Forms
 {
@@ -30,7 +31,18 @@ namespace Task1.Forms
             get { return chart.Series; }
         }
 
-        public Statistics Statistics { get; set; }
+        private Statistics statistics;
+
+        public virtual Statistics GetStatistics()
+        {
+            return statistics;
+        }
+
+        public virtual void SetStatistics(Statistics value)
+        {
+            statistics = value;
+        }
+
         protected List<IUpdatable> LabelControllers { get; set; }
 
 
@@ -42,7 +54,7 @@ namespace Task1.Forms
 
             this.mainForm = mainForm;
             mainForm.PasswordsUpdate += UpdateForm;
-            Statistics = statistics;
+            SetStatistics(statistics);
             
             LabelControllers = new List<IUpdatable>();
             Init();
@@ -113,7 +125,8 @@ namespace Task1.Forms
 
         protected virtual double FormatY(double value)
         {
-            return TimeSpanConverter.TotalSeconds(value);
+            //return TimeSpanConverter.TotalSeconds(value);
+            return value;
         }
         protected virtual T FormatX<T>(T value)
         {
@@ -128,5 +141,9 @@ namespace Task1.Forms
             }
         }
 
+        protected void ChartForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            mainForm.PasswordsUpdate -= UpdateForm;
+        }
     }
 }

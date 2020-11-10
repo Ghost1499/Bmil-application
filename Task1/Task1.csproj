@@ -89,7 +89,7 @@
     <Compile Include="Forms\TypingDinamicChartForm.Designer.cs">
       <DependentUpon>TypingDinamicChartForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="InputController.cs" />
+    <Compile Include="main\InputController.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,15 +111,26 @@
       <DependentUpon>202011011520416_AddSymbolActionMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="PasswordAction.cs" />
+    <Compile Include="main\PasswordAction.cs" />
     <Compile Include="PasswordActionBuilder.cs" />
     <Compile Include="PasswordActionContext.cs" />
-    <Compile Include="PasswordManager.cs" />
+    <Compile Include="main\PasswordManager.cs" />
+    <Compile Include="PasswordsVelocityChartForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PasswordsVelocityChartForm.Designer.cs">
+      <DependentUpon>PasswordsVelocityChartForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Settings.cs" />
-    <Compile Include="Statistics.cs" />
-    <Compile Include="SymbolAction.cs" />
+    <Compile Include="main\Settings.cs" />
+    <Compile Include="main\Statistics.cs" />
+    <Compile Include="main\SymbolAction.cs" />
+    <Compile Include="StatisticsInterfaces\IKeysPressDurationStatistics.cs" />
+    <Compile Include="StatisticsInterfaces\IPasswordDinamicStatistics.cs" />
+    <Compile Include="StatisticsInterfaces\IPasswordsDurationsStatistics.cs" />
+    <Compile Include="StatisticsInterfaces\IPasswordVelocityStatistics.cs" />
+    <Compile Include="StatisticsInterfaces\IStatistics.cs" />
     <Compile Include="TimeSpanConverter.cs" />
     <EmbeddedResource Include="Forms\ChartForm.resx">
       <DependentUpon>ChartForm.cs</DependentUpon>

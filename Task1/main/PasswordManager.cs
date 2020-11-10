@@ -13,11 +13,15 @@ namespace Task1
         public List<PasswordAction> PasswordActions { get; protected set; }
         public PasswordAction PasswordAction { get { return PasswordActions.Last(); } }
 
-        public PasswordManager()
+        public Settings Settings { get; }
+
+        public PasswordManager(Settings settings)
         {
             database = new PasswordActionContext();
+            Settings = settings;
             //database.PasswordActions.Load();
             UpdatePasswordAtions();
+            
         }
 
         ~PasswordManager()
@@ -27,7 +31,7 @@ namespace Task1
 
         protected void UpdatePasswordAtions()
         {
-            PasswordActions = database.PasswordActions.Include(passAct=> passAct.SymbolActions).ToList();
+            PasswordActions = database.PasswordActions.Include(passAct=> passAct.SymbolActions).Where(passAct=>passAct.ValidPassword==this.Settings.Password).ToList();
         }
         public void InsertPasswordAction(PasswordAction passwordAction)
         {

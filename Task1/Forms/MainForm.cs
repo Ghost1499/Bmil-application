@@ -47,9 +47,10 @@ namespace Task1
         public MainForm()
         {
             InitializeComponent();
-            PasswordManager = new PasswordManager();
-            //PasswordActions = PasswordManager.PasswordActions;
             settings = new Settings();
+            PasswordManager = new PasswordManager(settings);
+            //PasswordActions = PasswordManager.PasswordActions;
+           
             //settings = new Settings("passWoRdtoTESt1882",PasswordManager.PasswordsAlphabets.А3);
             inputController = new InputController();
             statistics = new Statistics(PasswordManager);
@@ -66,6 +67,7 @@ namespace Task1
             acceptPasswordButton.Select();
             InputLanguage.CurrentInputLanguage = InputLanguage.FromCulture(new System.Globalization.CultureInfo("en-US"));
             UpdateLabels();
+            UpdateValues();
         }
         public void UpdateLabels()
         {
@@ -91,9 +93,9 @@ namespace Task1
             //{
             //    passwordsDurattionsChartForm.UpdateForm();
             //}
-            mathExpectationLabel.Text = TimeSpanConverter.TotalSeconds(statistics.GetPasswordsMathExpectasion()).ToString();
+            mathExpectationLabel.Text = statistics.GetPasswordsMathExpectasion().ToString();
             dispersionLabel.Text = statistics.GetPasswordsDispersion().ToString();
-            sigmaLabel.Text = TimeSpanConverter.TotalSeconds(statistics.GetPasswordsSigma()).ToString();
+            sigmaLabel.Text = statistics.GetPasswordsSigma().ToString();
          
         }
 
@@ -198,6 +200,12 @@ namespace Task1
         {
             KeysPressDurationChartForm keysPressDurationChartForm = new KeysPressDurationChartForm(this, statistics);
             keysPressDurationChartForm.Show();
+        }
+
+        private void passwordsVelocityToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PasswordsVelocityChartForm passwordsVelocityChartForm = new PasswordsVelocityChartForm(this, statistics);
+            passwordsVelocityChartForm.Show();
         }
 
 

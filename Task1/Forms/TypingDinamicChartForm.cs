@@ -8,14 +8,24 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using Task1.StatisticsInterfaces;
+
 
 namespace Task1.Forms
 {
     public partial class TypingDinamicChartForm : ChartForm
     {
+        public new IPasswordDinamicStatistics Statistics { get; set; }
+        public override void SetStatistics(Statistics value)
+        {
+            base.SetStatistics(value);
+            Statistics = value;
+        }
+
         public TypingDinamicChartForm(MainForm mainForm,Statistics statistics):base(mainForm,statistics)
         {
             InitializeComponent();
+            Statistics = statistics;
         }
         protected override void InitChart()
         {

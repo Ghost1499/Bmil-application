@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Task1.StatisticsInterfaces;
 
 namespace Task1
 {
-    public class Statistics
+    public class Statistics: IPasswordsDurationsStatistics, IPasswordDinamicStatistics,IKeysPressDurationStatistics,IPasswordVelocityStatistics
     {
         public List<PasswordAction> PasswordActions { get { return PasswordManager.PasswordActions; } }
         public PasswordAction PasswordAction { get { return PasswordActions.Last(); } }
@@ -41,18 +42,22 @@ namespace Task1
 
         }
 
-        
+
+        public double[] GetPasswordsDurations()//исправить long и int
+        {
+            return GetPasswordDurations(PasswordActions);
+        }
         public double[] GetPasswordDurations(List<PasswordAction> passwordActions)//исправить long и int
         {
             double[] result = new double[passwordActions.Count()];
             for (int i = 0; i < result.Length; i++)
             {
-                result[i] = passwordActions[i].TimeDuration;
+                result[i] = TimeSpanConverter.TotalSeconds(passwordActions[i].TimeDuration);
             }
             return result;
         }
 
-        public void GetKeysPressDuration(out string[] xValues, out double[] yValues)
+        public void GetKeysPressDurations(out string[] xValues, out double[] yValues)
         {
             PasswordAction passwordAction = PasswordAction;
             GetKeysPressDuration(passwordAction, out xValues, out yValues);
@@ -146,5 +151,35 @@ namespace Task1
         {
             return MathExpectation(values.Cast<double>().ToArray());
         }
+
+        public double GetPasswordsVelocityMathExpectasion()
+        {
+            return MathExpectation(GetPasswordsVelocity());
+        }
+
+        public double GetPasswordsVelocityDispersion()
+        {
+            return Dispersion(GetPasswordsVelocity());
+        }
+
+        public double GetPasswordsVelocitySigma()
+        {
+            return Sigma(GetPasswordsVelocity());
+        }
+
+        public double[] GetPasswordsVelocity()
+        {
+            return GetPasswordsVelocity(PasswordActions);
+        }
+        public double[] GetPasswordsVelocity(List<PasswordAction> passwordActions)
+        {
+            double[] result = new double[passwordActions.Count()];
+            for (int i = 0; i < result.Length; i++)
+            {
+                result[i] = passwordActions[i].ValidPassword.Length/ TimeSpanConverter.TotalSeconds(passwordActions[i].TimeDuration);
+            }
+            return result;
+        }
+
     }
 }
