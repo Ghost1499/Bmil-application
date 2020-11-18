@@ -7,12 +7,16 @@ using System.Text;
 using System.Windows.Forms;
 using Task1.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+<<<<<<< HEAD
 using Task1.StatisticsInterfaces;
+=======
+>>>>>>> 9680844b32b96d6de35f6916d7f3ebb952050b53
 
 namespace Task1.Forms
 {
     public partial class PasswordsDurattionsChartForm : Task1.Forms.ChartForm
     {
+<<<<<<< HEAD
         public new IPasswordsDurationsStatistics Statistics { get; set; }
         public override void SetStatistics(Statistics value)
         {
@@ -20,6 +24,9 @@ namespace Task1.Forms
             Statistics = value;
         }
         public PasswordsDurattionsChartForm(MainForm mainForm,Statistics statistics):base(mainForm,statistics)
+=======
+        public PasswordsDurattionsChartForm(MainForm mainForm):base(mainForm)
+>>>>>>> 9680844b32b96d6de35f6916d7f3ebb952050b53
         {
             InitializeComponent();
         }
@@ -31,6 +38,7 @@ namespace Task1.Forms
             LastSeries.ChartType = SeriesChartType.Column;
 
         }
+<<<<<<< HEAD
         protected override void InitLabelsGroupBox()
         {
             base.InitLabelsGroupBox();
@@ -41,6 +49,12 @@ namespace Task1.Forms
         protected override void UpdateChart()
         {
             double[] yValues = Statistics.GetPasswordsDurations();
+=======
+
+        protected override void UpdateChart()
+        {
+            double[] yValues = mainForm.StatisticsManager.GetPasswordDurations(mainForm.PasswordActions);
+>>>>>>> 9680844b32b96d6de35f6916d7f3ebb952050b53
             UpdateChartByData(yValues);
             
         }

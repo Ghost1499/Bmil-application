@@ -17,10 +17,18 @@ namespace Task1
     {
         InputController inputController;
         Settings settings;
+<<<<<<< HEAD
         Statistics statistics;
         //HistogramForm histogramForm;
         //PasswordDinamicForm dinamicForm;
         //PressDurationChartForm pressDurationChartForm;
+=======
+        StatisticsManager statisticsManager;
+        List<PasswordAction> passwordActions;
+        HistogramForm histogramForm;
+        PasswordDinamicForm dinamicForm;
+        PressDurationChartForm pressDurationChartForm;
+>>>>>>> 9680844b32b96d6de35f6916d7f3ebb952050b53
         PasswordsDurattionsChartForm passwordsDurattionsChartForm;
         SettingsForm settingsForm;
 
@@ -48,9 +56,12 @@ namespace Task1
         {
             InitializeComponent();
             settings = new Settings();
+<<<<<<< HEAD
             PasswordManager = new PasswordManager(settings);
             //PasswordActions = PasswordManager.PasswordActions;
            
+=======
+>>>>>>> 9680844b32b96d6de35f6916d7f3ebb952050b53
             //settings = new Settings("passWoRdtoTESt1882",PasswordManager.PasswordsAlphabets.А3);
             inputController = new InputController();
             statistics = new Statistics(PasswordManager);
@@ -76,6 +87,7 @@ namespace Task1
         }
         private void UpdateValues()
         {
+<<<<<<< HEAD
             //if (histogramForm != null)
             //{
             //    histogramForm.UpdateHistogram();
@@ -96,6 +108,28 @@ namespace Task1
             mathExpectationLabel.Text = Math.Round(statistics.GetPasswordsMathExpectasion(),3).ToString();
             dispersionLabel.Text = Math.Round(statistics.GetPasswordsDispersion(),3).ToString();
             sigmaLabel.Text =Math.Round(statistics.GetPasswordsSigma(),3).ToString();
+=======
+            if (histogramForm != null)
+            {
+                histogramForm.UpdateHistogram();
+
+            }
+            if (dinamicForm != null)
+            {
+                dinamicForm.Update();
+            }
+            if (pressDurationChartForm != null)
+            {
+                pressDurationChartForm.Update();
+            }
+            if (passwordsDurattionsChartForm != null)
+            {
+                passwordsDurattionsChartForm.UpdateForm();
+            }
+            mathExpectationLabel.Text = TimeSpanConverter.TotalSeconds(statisticsManager.GetPasswordsMathExpectasion(statisticsManager.GetPasswordDurations(passwordActions))).ToString();
+            dispersionLabel.Text = statisticsManager.GetPasswordsDispersion(statisticsManager.GetPasswordDurations(passwordActions)).ToString();
+            sigmaLabel.Text = TimeSpanConverter.TotalSeconds(statisticsManager.GetPasswordsSigma(statisticsManager.GetPasswordDurations(passwordActions))).ToString();
+>>>>>>> 9680844b32b96d6de35f6916d7f3ebb952050b53
          
         }
 
@@ -206,6 +240,12 @@ namespace Task1
         {
             PasswordsVelocityChartForm passwordsVelocityChartForm = new PasswordsVelocityChartForm(this, statistics);
             passwordsVelocityChartForm.Show();
+        }
+
+        private void passwordsDurationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            passwordsDurattionsChartForm = new PasswordsDurattionsChartForm(this);
+            passwordsDurattionsChartForm.Show();
         }
 
 

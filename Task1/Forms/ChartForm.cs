@@ -23,11 +23,16 @@ namespace Task1.Forms
         {
             get
             {
+<<<<<<< HEAD
                 return chart.Series.Last();
+=======
+                return mainChart.Series.Last();
+>>>>>>> 9680844b32b96d6de35f6916d7f3ebb952050b53
             }
         }
         protected SeriesCollection Series
         {
+<<<<<<< HEAD
             get { return chart.Series; }
         }
 
@@ -52,6 +57,14 @@ namespace Task1.Forms
             chart = mainChart;
             layoutPanel = mainFlowLayoutPanel;
 
+=======
+            get { return mainChart.Series; }
+        }
+
+        public ChartForm(MainForm mainForm)
+        {
+            InitializeComponent();
+>>>>>>> 9680844b32b96d6de35f6916d7f3ebb952050b53
             this.mainForm = mainForm;
             mainForm.PasswordsUpdate += UpdateForm;
             SetStatistics(statistics);
@@ -71,6 +84,7 @@ namespace Task1.Forms
             
         }
         protected virtual void InitLabelsGroupBox()
+<<<<<<< HEAD
         {
 
         }
@@ -145,5 +159,73 @@ namespace Task1.Forms
         {
             mainForm.PasswordsUpdate -= UpdateForm;
         }
+=======
+        {
+
+        }
+
+        public void UpdateForm()
+        {
+            UpdateChart();
+            UpdateLablesGroupBox();
+        }
+
+        protected abstract void UpdateChart();
+        //{
+        //    T[] xValues;
+        //    double[] yValues;
+        //    getData<T>(out xValues, out yValues);
+        //    UpdateChartByData<T>(yValues, xValues);
+        //    //dataSenderFunc<T> dataSenderFunc = dataSenderFunc<T>(out xValues, out yValues);
+
+        //}
+
+        //protected abstract void getData<T>(out T[] xValues, out double[] yValues);
+
+        //{
+        //protected virtual void getData<T>(out T[] xValues, out double[] yValues)
+        //{
+        //    xValues = new T[0];
+        //    yValues = new double[0];
+        //}
+
+        public void UpdateChartByData<T>(double[] yValues, T[] xValues )
+        {
+            LastSeries.Points.Clear();
+            //if (xValues.Equals(null) || xValues.Length == 0)
+            //{
+            //    UpdateChartByData(yValues);
+            //    return;
+            //}
+            for (int i = 0; i < yValues.Length; i++)
+            {
+                LastSeries.Points.AddXY(FormatX(xValues[i]), FormatY(yValues[i]));
+            }
+        }
+
+        protected void UpdateChartByData(double[] yValues)
+        {
+            LastSeries.Points.Clear();
+            for (int i = 0; i < yValues.Length; i++)
+            {
+                LastSeries.Points.AddY(FormatY(yValues[i]));
+            }
+        }
+
+        protected virtual double FormatY(double value)
+        {
+            return TimeSpanConverter.TotalSeconds(value);
+        }
+        protected virtual T FormatX<T>(T value)
+        {
+            return value;
+        }
+
+        protected virtual void UpdateLablesGroupBox()
+        {
+            
+        }
+
+>>>>>>> 9680844b32b96d6de35f6916d7f3ebb952050b53
     }
 }
