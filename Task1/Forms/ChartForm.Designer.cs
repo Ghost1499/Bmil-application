@@ -33,11 +33,7 @@
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.mainChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
-<<<<<<< HEAD
             this.mainFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
-=======
-            this.labelsGroupBox = new System.Windows.Forms.GroupBox();
->>>>>>> 9680844b32b96d6de35f6916d7f3ebb952050b53
             ((System.ComponentModel.ISupportInitialize)(this.mainChart)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,11 +60,7 @@
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.mainChart.Series.Add(series1);
-<<<<<<< HEAD
             this.mainChart.Size = new System.Drawing.Size(880, 558);
-=======
-            this.mainChart.Size = new System.Drawing.Size(926, 580);
->>>>>>> 9680844b32b96d6de35f6916d7f3ebb952050b53
             this.mainChart.TabIndex = 7;
             this.mainChart.Text = "chart1";
             title1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -76,7 +68,6 @@
             title1.Text = "График динамики ввода парольной фразы";
             this.mainChart.Titles.Add(title1);
             // 
-<<<<<<< HEAD
             // mainFlowLayoutPanel
             // 
             this.mainFlowLayoutPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -87,51 +78,24 @@
             this.mainFlowLayoutPanel.Name = "mainFlowLayoutPanel";
             this.mainFlowLayoutPanel.Size = new System.Drawing.Size(278, 558);
             this.mainFlowLayoutPanel.TabIndex = 10;
-=======
-            // labelsGroupBox
-            // 
-            this.labelsGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelsGroupBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.labelsGroupBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelsGroupBox.Location = new System.Drawing.Point(944, 12);
-            this.labelsGroupBox.Name = "labelsGroupBox";
-            this.labelsGroupBox.Size = new System.Drawing.Size(278, 580);
-            this.labelsGroupBox.TabIndex = 8;
-            this.labelsGroupBox.TabStop = false;
-            this.labelsGroupBox.Text = "Значения";
->>>>>>> 9680844b32b96d6de35f6916d7f3ebb952050b53
             // 
             // ChartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-<<<<<<< HEAD
             this.ClientSize = new System.Drawing.Size(1188, 582);
             this.Controls.Add(this.mainFlowLayoutPanel);
             this.Controls.Add(this.mainChart);
             this.Name = "ChartForm";
             this.Text = "ChartForm";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ChartForm_FormClosed);
-=======
-            this.ClientSize = new System.Drawing.Size(1234, 604);
-            this.Controls.Add(this.labelsGroupBox);
-            this.Controls.Add(this.mainChart);
-            this.Name = "ChartForm";
-            this.Text = "ChartForm";
->>>>>>> 9680844b32b96d6de35f6916d7f3ebb952050b53
             ((System.ComponentModel.ISupportInitialize)(this.mainChart)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-<<<<<<< HEAD
         protected System.Windows.Forms.DataVisualization.Charting.Chart mainChart;
         private System.Windows.Forms.FlowLayoutPanel mainFlowLayoutPanel;
-=======
-        private System.Windows.Forms.GroupBox labelsGroupBox;
-        protected System.Windows.Forms.DataVisualization.Charting.Chart mainChart;
->>>>>>> 9680844b32b96d6de35f6916d7f3ebb952050b53
     }
 }

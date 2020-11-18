@@ -10,7 +10,6 @@ C:\CSF\programming\programs\BMIL\Task1\Task1\obj\Debug\Task1.exe
 C:\CSF\programming\programs\BMIL\Task1\Task1\obj\Debug\Task1.pdb
 C:\CSF\programming\programs\BMIL\Task1\Task1\obj\Debug\Task1.Forms.SettingsForm.resources
 C:\CSF\programming\programs\BMIL\Task1\Task1\obj\Debug\Task1.Forms.ChartForm.resources
-<<<<<<< HEAD
 C:\CSF\programming\programs\BMIL\Task1\Task1\bin\Debug\EntityFramework.dll
 C:\CSF\programming\programs\BMIL\Task1\Task1\bin\Debug\EntityFramework.SqlServer.dll
 C:\CSF\programming\programs\BMIL\Task1\Task1\bin\Debug\EntityFramework.xml
@@ -19,5 +18,3 @@ C:\CSF\programming\programs\BMIL\Task1\Task1\obj\Debug\Task1.csproj.CopyComplete
 C:\CSF\programming\programs\BMIL\Task1\Task1\obj\Debug\Task1.Migrations.InitialCreate.resources
 C:\CSF\programming\programs\BMIL\Task1\Task1\obj\Debug\Task1.Migrations.PasswordActionMigration.resources
 C:\CSF\programming\programs\BMIL\Task1\Task1\obj\Debug\Task1.Migrations.AddSymbolActionMigration.resources
-=======
->>>>>>> 9680844b32b96d6de35f6916d7f3ebb952050b53
