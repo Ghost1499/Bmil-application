@@ -71,8 +71,8 @@ namespace Task1
         }
         public void UpdateLabels()
         {
-            samplePasswordLabel.Text = settings.Password;
-            passwordComplexetyLabel.Text = PasswordManager.CheckPasswordComplexity(settings.Password, settings.Alphabet).ToString();
+            samplePasswordLabel.Text =  settings.Password;
+            passwordComplexetyLabel.Text = Math.Round(PasswordManager.CheckPasswordComplexity(settings.Password, settings.Alphabet),2).ToString();
         }
         private void UpdateValues()
         {
@@ -93,9 +93,9 @@ namespace Task1
             //{
             //    passwordsDurattionsChartForm.UpdateForm();
             //}
-            mathExpectationLabel.Text = statistics.GetPasswordsMathExpectasion().ToString();
-            dispersionLabel.Text = statistics.GetPasswordsDispersion().ToString();
-            sigmaLabel.Text = statistics.GetPasswordsSigma().ToString();
+            mathExpectationLabel.Text = Math.Round(statistics.GetPasswordsMathExpectasion(),3).ToString();
+            dispersionLabel.Text = Math.Round(statistics.GetPasswordsDispersion(),3).ToString();
+            sigmaLabel.Text =Math.Round(statistics.GetPasswordsSigma(),3).ToString();
          
         }
 
