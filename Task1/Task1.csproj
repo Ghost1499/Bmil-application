@@ -65,6 +65,12 @@
     <Compile Include="Forms\ChartForm.Designer.cs">
       <DependentUpon>ChartForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FunctionChartForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FunctionChartForm.Designer.cs">
+      <DependentUpon>FunctionChartForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\KeysPressDurationChartForm.cs">
       <SubType>Form</SubType>
     </Compile>

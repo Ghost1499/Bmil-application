@@ -208,6 +208,12 @@ namespace Task1
             passwordsVelocityChartForm.Show();
         }
 
+        private void functionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FunctionChartForm functionChartForm = new FunctionChartForm(this, statistics);
+            functionChartForm.Show();
+        }
+
 
 
         //private int PasswordAccepted()

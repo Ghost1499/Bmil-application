@@ -47,6 +47,7 @@ namespace Task1
             get
             {
                 TimeSpan duration = this.EndTime - this.StartTime;
+                //duration-= TimeSpan.FromMilliseconds( SymbolActions[0].KeyDownTime);
                 return duration.TotalMilliseconds;
             }
         }
