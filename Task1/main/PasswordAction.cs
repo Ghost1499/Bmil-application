@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.Entity;
+using Task1.Exceptions;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -17,7 +18,24 @@ namespace Task1
         private int A;
 
         [NotMapped]
-        private Dictionary<double, int> function;
+        private SortedDictionary<double, int> function;
+
+        public SortedDictionary<double, int> NormalizedFunction()
+        {
+            if (TimeDuration < (0 + double.Epsilon)){
+                throw new BaseException("Password action don't complete");
+            }
+            if (function.Count == 0)
+            {
+                buildFunction();
+            }
+            SortedDictionary<double, int> normalizedFunction = new SortedDictionary<double, int>();
+            double duration = TimeDuration;
+            foreach (var keyValue in function) {
+                normalizedFunction.Add(keyValue.Key / duration, keyValue.Value);
+            }
+            return normalizedFunction;
+        }
 
         [Key]
         public int Id { get; set; }
@@ -50,7 +68,7 @@ namespace Task1
         {
             this.symbolActions = new List<SymbolAction>();
             this.pressedKeys = new List<SymbolAction>();
-            function = new Dictionary<double, int>();
+            function = new SortedDictionary<double, int>();
             this.OverlaysCount = 0;
             A = 1;
 
@@ -124,6 +142,17 @@ namespace Task1
                 return;
             }
             function[time] = function.Last().Value + (int)state;
+        }
+
+        private void buildFunction()
+        {
+            SetPasswordFunction(PasswordFunctionStates.Start, 0);
+            foreach(var symbolAction in symbolActions)
+            {
+                SetPasswordFunction(PasswordFunctionStates.KeyDown, symbolAction.KeyDownTime);
+                SetPasswordFunction(PasswordFunctionStates.KeyUp, symbolAction.KeyUpTime);
+
+            }
         }
     }
 
