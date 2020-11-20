@@ -89,6 +89,7 @@
     <Compile Include="Forms\TypingDinamicChartForm.Designer.cs">
       <DependentUpon>TypingDinamicChartForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="HaarFunction.cs" />
     <Compile Include="main\InputController.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
@@ -172,6 +173,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CustomMath\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
