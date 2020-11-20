@@ -8,14 +8,13 @@ namespace Task1
 {
     public static class HaarFunction
     {
-        public static double[] Haar(int N, double t)
+        public static Func<double,double>[] HaarVector(int N/*, double t*/)
         {
             if (N < 0)
                 throw new Exception("Wrong parametr N given");
-            //int r = 0;
-            //int m = 0;
-            double[] haarVector = new double[N];
-            haarVector[0] = 1;
+            //double[] haarVector = new double[N];
+            Func<double,double>[] haarVector = new Func<double, double>[N];
+            haarVector[0] = (double t)=> 1;
 
             int log = Convert.ToInt32(Math.Floor(Math.Log(N, 2)));
             int pow = 1;
@@ -23,7 +22,7 @@ namespace Task1
             {
                 for(int m = 1; m <= pow; m++,count++)
                 {
-                    haarVector[count] = haar(pow, m, t);
+                    haarVector[count] =(double t)=> haar(pow, m, t);
                 }
                 pow *= 2;
             }
