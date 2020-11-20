@@ -99,6 +99,7 @@
     </Compile>
     <Compile Include="IUpdatable.cs" />
     <Compile Include="LabelController.cs" />
+    <Compile Include="main\KeyAction.cs" />
     <Compile Include="Migrations\202010311410088_InitialCreate.cs" />
     <Compile Include="Migrations\202010311410088_InitialCreate.designer.cs">
       <DependentUpon>202010311410088_InitialCreate.cs</DependentUpon>
