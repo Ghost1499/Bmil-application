@@ -20,7 +20,7 @@ namespace Task1
             //passwordActions = new List<PasswordAction>();
         }
 
-        private void UnpressPressedKeys(DateTime endTime)
+        private void unpressPressedKeys(DateTime endTime)
         {
             for (int i = 0; i < PasswordAction.PressedKeys.Count(); i++)
             {
@@ -31,6 +31,9 @@ namespace Task1
         public void NextPasswordAction(string password,DateTime startTime)
         {
             PasswordAction = PasswordActionBuilder.ConstructPasswordAction(password, startTime);
+            PasswordAction.SetPasswordFunction(PasswordFunctionStates.Start, 0);
+
+
         }
 
         public PasswordAction EndPasswordAction(DateTime endTime,string passwordValue)
@@ -39,7 +42,7 @@ namespace Task1
             {
                 throw new InvalidPasswordException("Invalid password exception");
             }
-            UnpressPressedKeys(endTime);
+            unpressPressedKeys(endTime);
             PasswordAction.EndTime = endTime;
             PasswordAction oldPasswordAction = this.PasswordAction;
             this.PasswordAction = null;
@@ -51,9 +54,11 @@ namespace Task1
             {
                 return;
             }
-            SymbolAction symbolAction = new SymbolAction(keyEventArgs.KeyCode,keyEventArgs.Shift, PasswordAction.GetRelativeTime(worldTime));
+            double relativeTime = PasswordAction.GetRelativeTime(worldTime);
+            SymbolAction symbolAction = new SymbolAction(keyEventArgs.KeyCode,keyEventArgs.Shift, relativeTime);
             PasswordAction.SymbolActions.Add(symbolAction);
             PasswordAction.PressedKeys.Add(symbolAction);
+            PasswordAction.SetPasswordFunction(PasswordFunctionStates.KeyDown, relativeTime);
             if (PasswordAction.PressedKeys.Count > 1)
             {
                 PasswordAction.OverlaysCount++;
@@ -68,10 +73,13 @@ namespace Task1
             if (symbolActionIndex!=-1)
             {
                 SymbolAction symbolAction = PasswordAction.PressedKeys[symbolActionIndex];
-                symbolAction.KeyUpTime = PasswordAction.GetRelativeTime(worldTime);
+                double relativeTime= PasswordAction.GetRelativeTime(worldTime);
+                symbolAction.KeyUpTime = relativeTime;
+                PasswordAction.SetPasswordFunction(PasswordFunctionStates.KeyUp, relativeTime);
+
                 for (int i= symbolActionIndex+1; i < PasswordAction.PressedKeys.Count(); i++)
                 {
-                    PasswordAction.PressedKeys[i].OverlayEndingTime = PasswordAction.GetRelativeTime(worldTime);
+                    PasswordAction.PressedKeys[i].OverlayEndingTime = relativeTime;
                     //можно сохранять значения клавиш, на которые была наложена текущая обрабатываемая (в цикле) клавиша
                 }
                 if (symbolActionIndex != 0)

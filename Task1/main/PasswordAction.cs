@@ -14,6 +14,10 @@ namespace Task1
     {
         private List<SymbolAction> symbolActions;
         private List<SymbolAction> pressedKeys;
+        private int A;
+
+        [NotMapped]
+        private Dictionary<double, int> function;
 
         [Key]
         public int Id { get; set; }
@@ -46,7 +50,9 @@ namespace Task1
         {
             this.symbolActions = new List<SymbolAction>();
             this.pressedKeys = new List<SymbolAction>();
+            function = new Dictionary<double, int>();
             this.OverlaysCount = 0;
+            A = 1;
 
         }
         //public PasswordAction(string validPassword, DateTime startTime)
@@ -102,5 +108,29 @@ namespace Task1
             }
             return result;
         }
+        public void SetPasswordFunction(PasswordFunctionStates state,double time)
+        {
+            if (state == PasswordFunctionStates.Start)
+            {
+                function[time] = (int)state;
+                return;
+            }
+            if(state==PasswordFunctionStates.KeyDown && function.Last().Value >= 2 * A)
+            {
+                return;
+            }
+            if (state == PasswordFunctionStates.KeyUp && function.Last().Value <= 0)
+            {
+                return;
+            }
+            function[time] = function.Last().Value + (int)state;
+        }
+    }
+
+    public enum PasswordFunctionStates
+    {
+        KeyDown=1,
+        KeyUp=-1,
+        Start=0
     }
 }
