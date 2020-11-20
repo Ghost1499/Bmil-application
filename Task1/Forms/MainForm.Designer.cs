@@ -36,6 +36,7 @@
             this.passwordsDurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.typingDimanicToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.passwordKeyPressDurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.passwordsVelocityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.passwordComplexetyLabel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -45,7 +46,7 @@
             this.mathExpectationLabel = new System.Windows.Forms.Label();
             this.dispersionLabel = new System.Windows.Forms.Label();
             this.sigmaLabel = new System.Windows.Forms.Label();
-            this.passwordsVelocityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.functionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -98,7 +99,8 @@
             this.passwordsDurationToolStripMenuItem,
             this.typingDimanicToolStripMenuItem,
             this.passwordKeyPressDurationToolStripMenuItem,
-            this.passwordsVelocityToolStripMenuItem});
+            this.passwordsVelocityToolStripMenuItem,
+            this.functionToolStripMenuItem});
             this.статистикаToolStripMenuItem.Name = "статистикаToolStripMenuItem";
             this.статистикаToolStripMenuItem.Size = new System.Drawing.Size(111, 29);
             this.статистикаToolStripMenuItem.Text = "Статистика";
@@ -123,6 +125,13 @@
             this.passwordKeyPressDurationToolStripMenuItem.Size = new System.Drawing.Size(344, 30);
             this.passwordKeyPressDurationToolStripMenuItem.Text = "Длительность нажатия клавиш";
             this.passwordKeyPressDurationToolStripMenuItem.Click += new System.EventHandler(this.passwordKeyPressDurationToolStripMenuItem_Click);
+            // 
+            // passwordsVelocityToolStripMenuItem
+            // 
+            this.passwordsVelocityToolStripMenuItem.Name = "passwordsVelocityToolStripMenuItem";
+            this.passwordsVelocityToolStripMenuItem.Size = new System.Drawing.Size(344, 30);
+            this.passwordsVelocityToolStripMenuItem.Text = "Скорость ввода паролей";
+            this.passwordsVelocityToolStripMenuItem.Click += new System.EventHandler(this.passwordsVelocityToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
@@ -211,12 +220,12 @@
             this.sigmaLabel.TabIndex = 17;
             this.sigmaLabel.Text = "None";
             // 
-            // passwordsVelocityToolStripMenuItem
+            // functionToolStripMenuItem
             // 
-            this.passwordsVelocityToolStripMenuItem.Name = "passwordsVelocityToolStripMenuItem";
-            this.passwordsVelocityToolStripMenuItem.Size = new System.Drawing.Size(344, 30);
-            this.passwordsVelocityToolStripMenuItem.Text = "Скорость ввода паролей";
-            this.passwordsVelocityToolStripMenuItem.Click += new System.EventHandler(this.passwordsVelocityToolStripMenuItem_Click);
+            this.functionToolStripMenuItem.Name = "functionToolStripMenuItem";
+            this.functionToolStripMenuItem.Size = new System.Drawing.Size(344, 30);
+            this.functionToolStripMenuItem.Text = "Функция f(x)";
+            this.functionToolStripMenuItem.Click += new System.EventHandler(this.functionToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -265,6 +274,7 @@
         private System.Windows.Forms.ToolStripMenuItem typingDimanicToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem passwordKeyPressDurationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem passwordsVelocityToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem functionToolStripMenuItem;
     }
 }
 
