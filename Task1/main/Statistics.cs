@@ -10,7 +10,7 @@ namespace Task1
     public class Statistics: IPasswordsDurationsStatistics, IPasswordDinamicStatistics,IKeysPressDurationStatistics,IPasswordVelocityStatistics
     {
         public List<PasswordAction> PasswordActions { get { return PasswordManager.PasswordActions; } }
-        public PasswordAction PasswordAction { get { return PasswordActions.Last(); } }
+        public PasswordAction PasswordAction { get { return PasswordActions.LastOrDefault(); } }
 
         public PasswordManager PasswordManager { get; }
 

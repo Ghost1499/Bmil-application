@@ -106,6 +106,7 @@
     <Compile Include="IUpdatable.cs" />
     <Compile Include="LabelController.cs" />
     <Compile Include="main\KeyAction.cs" />
+    <Compile Include="main\User.cs" />
     <Compile Include="Migrations\202010311410088_InitialCreate.cs" />
     <Compile Include="Migrations\202010311410088_InitialCreate.designer.cs">
       <DependentUpon>202010311410088_InitialCreate.cs</DependentUpon>
@@ -117,6 +118,14 @@
     <Compile Include="Migrations\202011011520416_AddSymbolActionMigration.cs" />
     <Compile Include="Migrations\202011011520416_AddSymbolActionMigration.designer.cs">
       <DependentUpon>202011011520416_AddSymbolActionMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011242208396_AddUserMigration.cs" />
+    <Compile Include="Migrations\202011242208396_AddUserMigration.designer.cs">
+      <DependentUpon>202011242208396_AddUserMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011242231571_AddUserMigration2.cs" />
+    <Compile Include="Migrations\202011242231571_AddUserMigration2.designer.cs">
+      <DependentUpon>202011242231571_AddUserMigration2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="main\PasswordAction.cs" />
@@ -140,6 +149,7 @@
     <Compile Include="StatisticsInterfaces\IPasswordVelocityStatistics.cs" />
     <Compile Include="StatisticsInterfaces\IStatistics.cs" />
     <Compile Include="TimeSpanConverter.cs" />
+    <Compile Include="UserContext.cs" />
     <EmbeddedResource Include="Forms\ChartForm.resx">
       <DependentUpon>ChartForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -157,6 +167,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011011520416_AddSymbolActionMigration.resx">
       <DependentUpon>202011011520416_AddSymbolActionMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011242208396_AddUserMigration.resx">
+      <DependentUpon>202011242208396_AddUserMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011242231571_AddUserMigration2.resx">
+      <DependentUpon>202011242231571_AddUserMigration2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

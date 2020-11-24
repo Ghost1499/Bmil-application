@@ -1,22 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.Entity;
 using Task1.main;
 
 namespace Task1
 {
-    class PasswordActionContext:DbContext
+    class UserContext : DbContext
     {
-        public PasswordActionContext() : base("DbConnection")
+        public UserContext() : base("DbConnection")
         {
 
         }
 
-        public DbSet<PasswordAction> PasswordActions { get; set; }
         public DbSet<User> Users { get; set; }
-
     }
 }

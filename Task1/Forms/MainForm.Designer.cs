@@ -37,6 +37,7 @@
             this.typingDimanicToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.passwordKeyPressDurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.passwordsVelocityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.functionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.passwordComplexetyLabel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -46,7 +47,7 @@
             this.mathExpectationLabel = new System.Windows.Forms.Label();
             this.dispersionLabel = new System.Windows.Forms.Label();
             this.sigmaLabel = new System.Windows.Forms.Label();
-            this.functionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.usersListBox = new System.Windows.Forms.ListBox();
             this.mainMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -132,6 +133,13 @@
             this.passwordsVelocityToolStripMenuItem.Size = new System.Drawing.Size(344, 30);
             this.passwordsVelocityToolStripMenuItem.Text = "Скорость ввода паролей";
             this.passwordsVelocityToolStripMenuItem.Click += new System.EventHandler(this.passwordsVelocityToolStripMenuItem_Click);
+            // 
+            // functionToolStripMenuItem
+            // 
+            this.functionToolStripMenuItem.Name = "functionToolStripMenuItem";
+            this.functionToolStripMenuItem.Size = new System.Drawing.Size(344, 30);
+            this.functionToolStripMenuItem.Text = "Функция f(x)";
+            this.functionToolStripMenuItem.Click += new System.EventHandler(this.functionToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
@@ -220,18 +228,23 @@
             this.sigmaLabel.TabIndex = 17;
             this.sigmaLabel.Text = "None";
             // 
-            // functionToolStripMenuItem
+            // usersListBox
             // 
-            this.functionToolStripMenuItem.Name = "functionToolStripMenuItem";
-            this.functionToolStripMenuItem.Size = new System.Drawing.Size(344, 30);
-            this.functionToolStripMenuItem.Text = "Функция f(x)";
-            this.functionToolStripMenuItem.Click += new System.EventHandler(this.functionToolStripMenuItem_Click);
+            this.usersListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.usersListBox.FormattingEnabled = true;
+            this.usersListBox.ItemHeight = 26;
+            this.usersListBox.Location = new System.Drawing.Point(886, 116);
+            this.usersListBox.Name = "usersListBox";
+            this.usersListBox.Size = new System.Drawing.Size(147, 82);
+            this.usersListBox.TabIndex = 18;
+            this.usersListBox.SelectedIndexChanged += new System.EventHandler(this.usersListBox_SelectedIndexChanged);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1133, 605);
+            this.Controls.Add(this.usersListBox);
             this.Controls.Add(this.sigmaLabel);
             this.Controls.Add(this.dispersionLabel);
             this.Controls.Add(this.mathExpectationLabel);
@@ -275,6 +288,7 @@
         private System.Windows.Forms.ToolStripMenuItem passwordKeyPressDurationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem passwordsVelocityToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem functionToolStripMenuItem;
+        private System.Windows.Forms.ListBox usersListBox;
     }
 }
 

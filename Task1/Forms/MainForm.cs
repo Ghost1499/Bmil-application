@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using Task1.Exceptions;
 using Task1.Forms;
+using Task1.main;
 
 namespace Task1
 {
@@ -52,7 +53,7 @@ namespace Task1
             //PasswordActions = PasswordManager.PasswordActions;
            
             //settings = new Settings("passWoRdtoTESt1882",PasswordManager.PasswordsAlphabets.А3);
-            inputController = new InputController();
+            inputController = new InputController(settings);
             statistics = new Statistics(PasswordManager);
             //passwordActions = new List<PasswordAction>();
             Init();
@@ -64,6 +65,12 @@ namespace Task1
 
         private void Init()
         {
+            usersListBox.DisplayMember = "Login";
+            usersListBox.ValueMember = "Id";
+            usersListBox.DataSource = PasswordManager.Users; 
+
+            usersListBox.SelectedIndexChanged += usersListBox_SelectedIndexChanged;
+
             acceptPasswordButton.Select();
             InputLanguage.CurrentInputLanguage = InputLanguage.FromCulture(new System.Globalization.CultureInfo("en-US"));
             UpdateLabels();
@@ -212,6 +219,19 @@ namespace Task1
         {
             FunctionChartForm functionChartForm = new FunctionChartForm(this, statistics);
             functionChartForm.Show();
+        }
+
+        private void usersListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // получаем id выделенного объекта
+            int value = (int)usersListBox.SelectedValue;
+
+            // получаем весь выделенный объект
+            User user = (User)usersListBox.SelectedItem;
+            //MessageBox.Show(value.ToString() + ". " + passwordsAlphabet.ToString());
+            settings.User = user;
+            PasswordManager.UpdatePasswordAtions();
+            PasswordsUpdate?.Invoke();
         }
 
 
