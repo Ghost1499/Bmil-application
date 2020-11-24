@@ -13,6 +13,8 @@ namespace Task1.Forms
 {
     public partial class FunctionChartForm : ChartForm
     {
+
+        double[] vector;
         public FunctionChartForm(MainForm mainForm, Statistics statistics) : base(mainForm, statistics)
         {
             InitializeComponent();
@@ -22,6 +24,7 @@ namespace Task1.Forms
         {
             base.InitChart();
             chart.Titles[0].Text = "Функция f(x)";
+            mainChart.ChartAreas.Last().AxisY.Title = "амплитуда";
             LastSeries.ChartType = SeriesChartType.StepLine;
             LastSeries.BorderWidth = 3;
             chart.ChartAreas[0].AxisY.Interval = 1;
@@ -35,10 +38,24 @@ namespace Task1.Forms
         }
         protected override void UpdateChart()
         {
-            SortedDictionary<double, int> function = mainForm.StatisticsManager.PasswordAction.NormalizedFunction();
+            SortedList<double, int> function = mainForm.StatisticsManager.PasswordAction.NormalizedFunction();
             double[] yValues;
             yValues=Array.ConvertAll(function.Values.ToArray(),(val)=>(double)val);
             UpdateChartByData(yValues, function.Keys.Select((val) => Math.Round(val, 2)).ToArray());
+        }
+
+        protected override void InitLabelsGroupBox()
+        {
+            base.InitLabelsGroupBox();
+            vector = GetStatistics().GetPasswordVector();
+            for(int i = 0; i < vector.Length; i++)
+            {
+                int local_i = i;
+                LabelControllers.Add(new LabelController("0: ", ()=>vector[local_i], layoutPanel));
+
+            }
+
+            //LabelControllers.Add(new LabelController("Количество наложений", Statistics.GetOverlaysCount, layoutPanel));
         }
     }
 }

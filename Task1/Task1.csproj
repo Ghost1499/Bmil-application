@@ -123,10 +123,10 @@
     <Compile Include="PasswordActionBuilder.cs" />
     <Compile Include="PasswordActionContext.cs" />
     <Compile Include="main\PasswordManager.cs" />
-    <Compile Include="PasswordsVelocityChartForm.cs">
+    <Compile Include="Forms\PasswordsVelocityChartForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PasswordsVelocityChartForm.Designer.cs">
+    <Compile Include="Forms\PasswordsVelocityChartForm.Designer.cs">
       <DependentUpon>PasswordsVelocityChartForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
