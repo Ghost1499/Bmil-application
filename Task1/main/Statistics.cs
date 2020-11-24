@@ -181,5 +181,10 @@ namespace Task1
             return result;
         }
 
+        public double[] GetPasswordVector()
+        {
+            return this.PasswordAction.GetBiometricalVector();
+        }
+
     }
 }

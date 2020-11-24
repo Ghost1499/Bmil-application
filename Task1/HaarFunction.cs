@@ -22,7 +22,9 @@ namespace Task1
             {
                 for(int m = 1; m <= pow; m++,count++)
                 {
-                    haarVector[count] =(double t)=> haar(pow, m, t);
+                    int local_pow = pow;
+                    int local_m = m;
+                    haarVector[count] =(double t)=> haar(local_pow, local_m, t);
                 }
                 pow *= 2;
             }
