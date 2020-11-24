@@ -8,7 +8,7 @@ namespace Task1
 {
     class PasswordActionBuilder
     {
-        public PasswordAction ConstructPasswordAction(string validPassword, DateTime startTime)
+        public PasswordAction ConstructPasswordAction(string validPassword, DateTime startTime, int userId)
         {
             PasswordAction passwordAction = new PasswordAction();
             if (string.IsNullOrEmpty(validPassword))
@@ -18,6 +18,7 @@ namespace Task1
             passwordAction.ValidPassword = validPassword;
             passwordAction.StartTime = startTime;
             passwordAction.EndTime = passwordAction.StartTime;
+            passwordAction.UserId = userId;
             return passwordAction;
         }
     }

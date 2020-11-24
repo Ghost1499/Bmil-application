@@ -63,7 +63,7 @@ namespace Task1
 
         [Required]
         public DateTime EndTime { get; set; }
-
+        public int? UserId { get; set; }
 
         public PasswordAction()
         {

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Task1.main;
 
 namespace Task1.Forms
 {
@@ -57,12 +58,32 @@ namespace Task1.Forms
             settings.Password = passwordSampleTextBox.Text;
             mainForm.UpdateLabels();
         }
-    }
-    class Phone
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public int Year { get; set; }
+
+        private void addUserButton_Click(object sender, EventArgs e)
+        {
+            string login = newUserTextBox.Text;
+            if (login != "")
+            {
+                if (!mainForm.PasswordManager.Users.Any((user) => user.Login == login))
+                {
+                    User user = new User(login);
+                    mainForm.PasswordManager.AddUser(user);
+                    MessageBox.Show("Пользователь добавлен", "Уведомление", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+                }
+                else
+                {
+                    MessageBox.Show("Пользователь с таким логином уже существует", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("Введите логин", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+        }
     }
 
 }

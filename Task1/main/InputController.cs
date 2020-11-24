@@ -12,11 +12,14 @@ namespace Task1
     {
         protected PasswordActionBuilder PasswordActionBuilder { get; set; }
         public PasswordAction PasswordAction { get; private set; }
+        public Settings Settings { get; }
+
         //public List<PasswordAction> PasswordActions { get => passwordActions; set => passwordActions = value; }
 
-        public InputController()
+        public InputController(Settings settings)
         {
             PasswordActionBuilder = new PasswordActionBuilder();
+            Settings = settings;
             //passwordActions = new List<PasswordAction>();
         }
 
@@ -30,7 +33,7 @@ namespace Task1
         }
         public void NextPasswordAction(string password,DateTime startTime)
         {
-            PasswordAction = PasswordActionBuilder.ConstructPasswordAction(password, startTime);
+            PasswordAction = PasswordActionBuilder.ConstructPasswordAction(password, startTime,Settings.User.Id);
             PasswordAction.SetPasswordFunction(PasswordFunctionStates.Start, 0);
 
 
