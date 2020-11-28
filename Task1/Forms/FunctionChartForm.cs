@@ -51,7 +51,7 @@ namespace Task1.Forms
             for(int i = 0; i < vector.Length; i++)
             {
                 int local_i = i;
-                LabelControllers.Add(new LabelController("0: ", ()=>vector[local_i], layoutPanel));
+                LabelControllers.Add(new LabelController(local_i.ToString(), ()=>vector[local_i], layoutPanel));
 
             }
 
