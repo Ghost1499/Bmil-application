@@ -54,8 +54,6 @@ namespace Task1.Forms
                 LabelControllers.Add(new LabelController(local_i.ToString(), ()=>vector[local_i], layoutPanel));
 
             }
-
-            //LabelControllers.Add(new LabelController("Количество наложений", Statistics.GetOverlaysCount, layoutPanel));
         }
     }
 }

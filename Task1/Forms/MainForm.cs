@@ -19,9 +19,6 @@ namespace Task1
         InputController inputController;
         Settings settings;
         Statistics statistics;
-        //HistogramForm histogramForm;
-        //PasswordDinamicForm dinamicForm;
-        //PressDurationChartForm pressDurationChartForm;
         PasswordsDurattionsChartForm passwordsDurattionsChartForm;
         SettingsForm settingsForm;
 
@@ -83,23 +80,6 @@ namespace Task1
         }
         private void UpdateValues()
         {
-            //if (histogramForm != null)
-            //{
-            //    histogramForm.UpdateHistogram();
-
-            //}
-            //if (dinamicForm != null)
-            //{
-            //    dinamicForm.Update();
-            //}
-            //if (pressDurationChartForm != null)
-            //{
-            //    pressDurationChartForm.Update();
-            //}
-            //if (passwordsDurattionsChartForm != null)
-            //{
-            //    passwordsDurattionsChartForm.UpdateForm();
-            //}
             mathExpectationLabel.Text = Math.Round(statistics.GetPasswordsMathExpectasion(),3).ToString();
             dispersionLabel.Text = Math.Round(statistics.GetPasswordsDispersion(),3).ToString();
             sigmaLabel.Text =Math.Round(statistics.GetPasswordsSigma(),3).ToString();
@@ -108,7 +88,7 @@ namespace Task1
 
 
 
-        private void AcceptPassword()//сделать события
+        private void AcceptPassword()
         {
             try
             {
@@ -120,7 +100,6 @@ namespace Task1
                 PasswordAction passwordAction = inputController.EndPasswordAction(DateTime.Now, passwordTextBox.Text);
                 PasswordManager.InsertPasswordAction(passwordAction);
                 PasswordsUpdate?.Invoke();
-                //passwordActions.Add(inputController.EndPasswordAction(DateTime.Now, passwordTextBox.Text));
                 UpdateValues();
             }
             catch (InvalidPasswordException)
@@ -234,11 +213,5 @@ namespace Task1
             PasswordsUpdate?.Invoke();
         }
 
-
-
-        //private int PasswordAccepted()
-        //{
-        //    return passwordVelocityTimer.
-        //}
     }
 }
