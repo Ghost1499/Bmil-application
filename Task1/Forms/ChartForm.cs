@@ -18,7 +18,6 @@ namespace Task1.Forms
         protected Chart chart;
 
         protected MainForm mainForm;
-        //public delegate void dataSenderFunc<T>(out T[] xValues, out double[] yValues);
         protected Series LastSeries
         {
             get
@@ -55,7 +54,7 @@ namespace Task1.Forms
             this.mainForm = mainForm;
             mainForm.PasswordsUpdate += UpdateForm;
             SetStatistics(statistics);
-            
+
             LabelControllers = new List<IUpdatable>();
             Init();
         }
@@ -68,7 +67,7 @@ namespace Task1.Forms
         }
         protected virtual void InitChart()
         {
-            
+
         }
         protected virtual void InitLabelsGroupBox()
         {
@@ -100,7 +99,7 @@ namespace Task1.Forms
         //    yValues = new double[0];
         //}
 
-        public void UpdateChartByData<T>(double[] yValues, T[] xValues )
+        public void UpdateChartByData<T>(double[] yValues, T[] xValues)
         {
             LastSeries.Points.Clear();
             //if (xValues.Equals(null) || xValues.Length == 0)
