@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using Task1.Containers;
 using Task1.StatisticsInterfaces;
 
 namespace Task1.Forms
@@ -42,7 +43,8 @@ namespace Task1.Forms
             statistics = value;
         }
 
-        protected List<IUpdatable> LabelControllers { get; set; }
+        //protected List<IUpdatable> LabelControllers { get; set; }
+        protected LabelsContainer LabelsContainer { get; set; }
 
 
         public ChartForm(MainForm mainForm, Statistics statistics)
@@ -55,7 +57,7 @@ namespace Task1.Forms
             mainForm.PasswordsUpdate += UpdateForm;
             SetStatistics(statistics);
 
-            LabelControllers = new List<IUpdatable>();
+            LabelsContainer = new Task1.Containers.LabelsContainer();
             Init();
         }
 
@@ -134,10 +136,7 @@ namespace Task1.Forms
 
         protected virtual void UpdateLablesGroupBox()
         {
-            foreach (IUpdatable labelController in LabelControllers)
-            {
-                labelController.Update();
-            }
+            LabelsContainer.Update();
         }
 
         protected void ChartForm_FormClosed(object sender, FormClosedEventArgs e)

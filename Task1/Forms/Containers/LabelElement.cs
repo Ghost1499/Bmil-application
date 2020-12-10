@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Task1
+namespace Task1.Containers
 {
-    public class LabelController:IUpdatable
+    public class LabelElement:IUpdatable
     {
         private string sampleText;
         private readonly Func<double> updaterMethod;
@@ -15,7 +15,7 @@ namespace Task1
 
         public Label Label { get; protected set; }
 
-        public LabelController(string sampleText,Func<double> updaterMethod,Control parent)
+        public LabelElement(string sampleText,Func<double> updaterMethod,Control parent)
         {
 
             this.sampleText = sampleText;

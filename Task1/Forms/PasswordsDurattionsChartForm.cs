@@ -8,6 +8,8 @@ using System.Windows.Forms;
 using Task1.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using Task1.StatisticsInterfaces;
+using Task1.Forms.Containers;
+using Task1.Containers;
 
 namespace Task1.Forms
 {
@@ -34,9 +36,23 @@ namespace Task1.Forms
         protected override void InitLabelsGroupBox()
         {
             base.InitLabelsGroupBox();
-            LabelControllers.Add(new LabelController("Математическое ожидание", Statistics.GetPasswordsMathExpectasion, layoutPanel));
-            LabelControllers.Add(new LabelController("Дисперсия в миллискундах", Statistics.GetPasswordsDispersion, layoutPanel));
-            LabelControllers.Add(new LabelController("Среднеквадратическое отклонение", Statistics.GetPasswordsSigma, layoutPanel));
+            Control parent = layoutPanel;
+            IBuilder fBuilder = new ContainersBuilder(new LabelsContainer(parent));
+
+            IBuilder builder = fBuilder.BuildContainer(parent, new GroupBox(), "Днем");
+            builder.BuildElement("Математическое ожидание", Statistics.GetPasswordsMathExpectasion, layoutPanel);
+            builder.BuildElement("Дисперсия в миллискундах", Statistics.GetPasswordsDispersion, layoutPanel);
+            builder.BuildElement("Среднеквадратическое отклонение", Statistics.GetPasswordsSigma, layoutPanel);
+
+            builder = fBuilder.BuildContainer(parent, new GroupBox(), "Вечером");
+            builder.BuildElement("Математическое ожидание", Statistics.GetPasswordsMathExpectasion, layoutPanel);
+            builder.BuildElement("Дисперсия в миллискундах", Statistics.GetPasswordsDispersion, layoutPanel);
+            builder.BuildElement("Среднеквадратическое отклонение", Statistics.GetPasswordsSigma, layoutPanel);
+
+            this.LabelsContainer = fBuilder.GetResult();
+            //LabelControllers.Add(new LabelController("Математическое ожидание", Statistics.GetPasswordsMathExpectasion, layoutPanel));
+            //LabelControllers.Add(new LabelController("Дисперсия в миллискундах", Statistics.GetPasswordsDispersion, layoutPanel));
+            //LabelControllers.Add(new LabelController("Среднеквадратическое отклонение", Statistics.GetPasswordsSigma, layoutPanel));
         }
         protected override void UpdateChart()
         {
