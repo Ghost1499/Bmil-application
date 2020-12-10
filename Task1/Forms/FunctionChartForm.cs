@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using Task1.Containers;
 
 namespace Task1.Forms
 {
@@ -47,13 +48,15 @@ namespace Task1.Forms
         protected override void InitLabelsGroupBox()
         {
             base.InitLabelsGroupBox();
+            LabelsContainer container = LabelsContainer as LabelsContainer;
             vector = GetStatistics().GetPasswordVector();
+            List<IUpdatable> labelElements = new List<IUpdatable>();
             for(int i = 0; i < vector.Length; i++)
             {
                 int local_i = i;
-                LabelControllers.Add(new LabelController(local_i.ToString(), ()=>vector[local_i], layoutPanel));
-
+                labelElements.Add(new LabelElement(local_i.ToString(), ()=>vector[local_i], layoutPanel));
             }
+            ((LabelsContainer)LabelsContainer).AddChildren(labelElements);
         }
     }
 }
