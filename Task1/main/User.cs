@@ -13,7 +13,7 @@ namespace Task1.main
         public int Id { get; set; }
         [Required]
         public string Login { get; set; }
-        public List<PasswordAction> PasswordActions { get; set; }
+        public virtual List<PasswordAction> PasswordActions { get; set; }
         public User() { }
         public User(string login)
         {

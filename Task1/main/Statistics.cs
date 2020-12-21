@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Task1.StatisticsInterfaces;
+using Task1.MyMath;
 
 namespace Task1
 {
@@ -12,9 +13,9 @@ namespace Task1
         public List<PasswordAction> PasswordActions { get { return PasswordManager.PasswordActions; } }
         public PasswordAction PasswordAction { get { return PasswordActions.LastOrDefault(); } }
 
-        public PasswordManager PasswordManager { get; }
+        public PasswordActionRepository PasswordManager { get; }
 
-        public Statistics(PasswordManager passwordManager)
+        public Statistics(PasswordActionRepository passwordManager)
         {
             PasswordManager = passwordManager;
         }
@@ -113,44 +114,7 @@ namespace Task1
 
 
 
-        public static double Sigma<T>(T[] values)
-        {
-            return Sigma(values.Cast<double>().ToArray());
-        }
-
-        public static double Sigma(double[] values)
-        {
-            return Math.Pow(Dispersion(values), (double)0.5);
-        }
-        public static double Dispersion<T>(T[] values)
-        {
-            return Dispersion(values.Cast<double>().ToArray());
-        }
-        public static double Dispersion(double[] values)
-        {
-            double m = MathExpectation(values);
-            double[] result = new double[values.Length];
-            for (int i = 0; i < values.Length; i++)
-            {
-                double val= (values[i] - m)*(values[i]-m);
-                result[i] = val;
-            }
-            return MathExpectation(result);
-        }
-
-        public static double MathExpectation(double[] values)
-        {
-            double sum = 0;
-            foreach (var value in values)
-            {
-                sum +=  value;
-            }
-            return sum / (double)values.Length;
-        }
-        public static double MathExpectation<T>(T[] values)
-        {
-            return MathExpectation(values.Cast<double>().ToArray());
-        }
+        
 
         public double GetPasswordsVelocityMathExpectasion()
         {

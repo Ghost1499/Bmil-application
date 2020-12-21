@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -9,7 +10,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using Task1.Containers;
-using Task1.StatisticsInterfaces;
 
 namespace Task1.Forms
 {
@@ -19,45 +19,23 @@ namespace Task1.Forms
         protected Chart chart;
 
         protected MainForm mainForm;
-        protected Series LastSeries
-        {
-            get
-            {
-                return chart.Series.Last();
-            }
-        }
-        protected SeriesCollection Series
-        {
-            get { return chart.Series; }
-        }
 
-        private Statistics statistics;
-
-        public virtual Statistics GetStatistics()
-        {
-            return statistics;
-        }
-
-        public virtual void SetStatistics(Statistics value)
-        {
-            statistics = value;
-        }
-
-        //protected List<IUpdatable> LabelControllers { get; set; }
         protected LabelsContainer LabelsContainer { get; set; }
+        protected List<LabelElement> LabelElements { get; set; }
+        public Settings Settings { get { return mainForm.Settings; } }
 
-
-        public ChartForm(MainForm mainForm, Statistics statistics)
+        public ChartForm(MainForm mainForm)
         {
             InitializeComponent();
             chart = mainChart;
             layoutPanel = mainFlowLayoutPanel;
 
-            this.mainForm = mainForm;
-            mainForm.PasswordsUpdate += UpdateForm;
-            SetStatistics(statistics);
 
-            LabelsContainer = new Task1.Containers.LabelsContainer();
+            this.mainForm = mainForm;
+
+            //mainForm.Context.PasswordActions.Local.CollectionChanged += UpdateForm;
+            mainForm.PasswordsUpdate += UpdateForm;
+            mainForm.ChangeUser += Clear;
             Init();
         }
 
@@ -73,16 +51,16 @@ namespace Task1.Forms
         }
         protected virtual void InitLabelsGroupBox()
         {
-
+            LabelElements = new List<LabelElement>();
         }
 
-        public void UpdateForm()
+        protected virtual void UpdateForm(/*object sender = null, NotifyCollectionChangedEventArgs e = null*/)
         {
-            UpdateChart();
             UpdateLablesGroupBox();
         }
 
-        protected abstract void UpdateChart();
+        public abstract void Clear();
+        //protected abstract void UpdateChart();
         //{
         //    T[] xValues;
         //    double[] yValues;
@@ -92,41 +70,28 @@ namespace Task1.Forms
 
         //}
 
-        //protected abstract void getData<T>(out T[] xValues, out double[] yValues);
 
+
+        //public void UpdateChartByData<T>(double[] yValues, T[] xValues)
         //{
-        //protected virtual void getData<T>(out T[] xValues, out double[] yValues)
-        //{
-        //    xValues = new T[0];
-        //    yValues = new double[0];
+        //    LastSeries.Points.Clear();
+        //    for (int i = 0; i < yValues.Length; i++)
+        //    {
+        //        LastSeries.Points.AddXY(FormatX(xValues[i]), FormatY(yValues[i]));
+        //    }
         //}
 
-        public void UpdateChartByData<T>(double[] yValues, T[] xValues)
-        {
-            LastSeries.Points.Clear();
-            //if (xValues.Equals(null) || xValues.Length == 0)
-            //{
-            //    UpdateChartByData(yValues);
-            //    return;
-            //}
-            for (int i = 0; i < yValues.Length; i++)
-            {
-                LastSeries.Points.AddXY(FormatX(xValues[i]), FormatY(yValues[i]));
-            }
-        }
-
-        protected void UpdateChartByData(double[] yValues)
-        {
-            LastSeries.Points.Clear();
-            for (int i = 0; i < yValues.Length; i++)
-            {
-                LastSeries.Points.AddY(FormatY(yValues[i]));
-            }
-        }
+        //protected void UpdateChartByData(double[] yValues)
+        //{
+        //    LastSeries.Points.Clear();
+        //    for (int i = 0; i < yValues.Length; i++)
+        //    {
+        //        LastSeries.Points.AddY(FormatY(yValues[i]));
+        //    }
+        //}
 
         protected virtual double FormatY(double value)
         {
-            //return TimeSpanConverter.TotalSeconds(value);
             return value;
         }
         protected virtual T FormatX<T>(T value)
@@ -136,7 +101,11 @@ namespace Task1.Forms
 
         protected virtual void UpdateLablesGroupBox()
         {
-            LabelsContainer.Update();
+            foreach (var item in LabelElements)
+            {
+                item.Update();
+            }
+            //LabelsContainer.Update();
         }
 
         protected void ChartForm_FormClosed(object sender, FormClosedEventArgs e)

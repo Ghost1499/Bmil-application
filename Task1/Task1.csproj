@@ -25,6 +25,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -34,6 +35,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -57,6 +59,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Forms\Containers\ContainersBuilder.cs" />
+    <Compile Include="Forms\Containers\IBuilder.cs" />
+    <Compile Include="Forms\Containers\IUpdatable.cs" />
+    <Compile Include="Main\AuthenticationController.cs" />
+    <Compile Include="MyMath\PasswordComplexity.cs" />
     <Compile Include="Exceptions\BaseException.cs" />
     <Compile Include="Exceptions\InvalidPasswordException.cs" />
     <Compile Include="Forms\ChartForm.cs">
@@ -65,19 +72,19 @@
     <Compile Include="Forms\ChartForm.Designer.cs">
       <DependentUpon>ChartForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Controllers\ParentElement.cs" />
-    <Compile Include="Forms\FunctionChartForm.cs">
+    <Compile Include="Forms\Containers\LabelsContainer.cs" />
+    <None Include="Forms\FunctionChartForm.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FunctionChartForm.Designer.cs">
+    </None>
+    <None Include="Forms\FunctionChartForm.Designer.cs">
       <DependentUpon>FunctionChartForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\KeysPressDurationChartForm.cs">
+    </None>
+    <None Include="Forms\KeysPressDurationChartForm.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\KeysPressDurationChartForm.Designer.cs">
+    </None>
+    <None Include="Forms\KeysPressDurationChartForm.Designer.cs">
       <DependentUpon>KeysPressDurationChartForm.cs</DependentUpon>
-    </Compile>
+    </None>
     <Compile Include="Forms\PasswordsDurattionsChartForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,22 +97,22 @@
     <Compile Include="Forms\SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\TypingDinamicChartForm.cs">
+    <None Include="Forms\TypingDinamicChartForm.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\TypingDinamicChartForm.Designer.cs">
+    </None>
+    <None Include="Forms\TypingDinamicChartForm.Designer.cs">
       <DependentUpon>TypingDinamicChartForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Math\HaarFunction.cs" />
-    <Compile Include="PasswordsActions\InputController.cs" />
+    </None>
+    <Compile Include="MyMath\HaarFunction.cs" />
+    <Compile Include="MyMath\StatisticsMethods.cs" />
+    <Compile Include="Main\InputController.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Controllers\IUpdatable.cs" />
-    <Compile Include="Forms\Controllers\LabelController.cs" />
+    <Compile Include="Forms\Containers\LabelElement.cs" />
     <Compile Include="Main\User.cs" />
     <Compile Include="Migrations\202010311410088_InitialCreate.cs" />
     <Compile Include="Migrations\202010311410088_InitialCreate.designer.cs">
@@ -129,27 +136,21 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PasswordsActions\PasswordAction.cs" />
-    <Compile Include="PasswordsActions\PasswordActionBuilder.cs" />
     <Compile Include="PasswordActionContext.cs" />
-    <Compile Include="Main\PasswordManager.cs" />
-    <Compile Include="Forms\PasswordsVelocityChartForm.cs">
+    <None Include="Forms\PasswordsVelocityChartForm.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\PasswordsVelocityChartForm.Designer.cs">
+    </None>
+    <None Include="Forms\PasswordsVelocityChartForm.Designer.cs">
       <DependentUpon>PasswordsVelocityChartForm.cs</DependentUpon>
-    </Compile>
+    </None>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Main\Settings.cs" />
-    <Compile Include="Main\Statistics.cs" />
+    <None Include="Main\Statistics.cs" />
     <Compile Include="PasswordsActions\SymbolAction.cs" />
-    <Compile Include="StatisticsInterfaces\IKeysPressDurationStatistics.cs" />
-    <Compile Include="StatisticsInterfaces\IPasswordDinamicStatistics.cs" />
-    <Compile Include="StatisticsInterfaces\IPasswordsDurationsStatistics.cs" />
-    <Compile Include="StatisticsInterfaces\IPasswordVelocityStatistics.cs" />
-    <Compile Include="StatisticsInterfaces\IStatistics.cs" />
     <Compile Include="Side\TimeSpanConverter.cs" />
-    <Compile Include="UserContext.cs" />
+    <Compile Include="Statistics\AStatistics.cs" />
+    <Compile Include="Statistics\DurationsStatistics.cs" />
     <EmbeddedResource Include="Forms\ChartForm.resx">
       <DependentUpon>ChartForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -198,7 +199,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="CustomMath\" />
     <Folder Include="Folder\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

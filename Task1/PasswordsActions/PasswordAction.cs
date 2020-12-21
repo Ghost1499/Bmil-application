@@ -8,6 +8,7 @@ using System.Data.Entity;
 using Task1.Exceptions;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Task1.MyMath;
 
 namespace Task1
 {
@@ -67,29 +68,30 @@ namespace Task1
 
         public PasswordAction()
         {
-            this.symbolActions = new List<SymbolAction>();
-            this.pressedKeys = new List<SymbolAction>();
-            function = new SortedList<double, int>();
-            this.OverlaysCount = 0;
-            A = 1;
+            constructPasswordAction();
 
         }
-        //public PasswordAction(string validPassword, DateTime startTime)
-        //{
-        //    if (string.IsNullOrEmpty(validPassword))
-        //    {
-        //        throw new ArgumentException("message", nameof(validPassword));
-        //    }
-        //    this.symbolActions = new List<SymbolAction>();
-        //    this.pressedKeys = new List<SymbolAction>();
-        //    this.ValidPassword = validPassword;
-        //    this.StartTime = startTime;
-        //    this.EndTime = this.StartTime;
-        //    //this.time = 0;
-        //    this.OverlaysCount = 0;
-        //}
+        public PasswordAction( DateTime startTime,int userId, string validPassword=null)
+        {
+            //if (string.IsNullOrEmpty(validPassword))
+            //{
+            //    throw new ArgumentException("message", nameof(validPassword));
+            //}
+            constructPasswordAction();
+            this.StartTime = startTime;
+            this.EndTime = this.StartTime;
+            this.UserId = userId;
+            ValidPassword = validPassword;
+        }
 
-
+        private void constructPasswordAction()
+        {
+            this.symbolActions = new List<SymbolAction>();
+            this.pressedKeys = new List<SymbolAction>();
+            this.function = new SortedList<double, int>();
+            this.OverlaysCount = 0;
+            this.A = 1;
+        }
 
         public int GetPreseedKeyIndex(Keys keyCode,bool isShiftPressed)
         {

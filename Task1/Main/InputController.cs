@@ -8,19 +8,24 @@ using Task1.Exceptions;
 
 namespace Task1
 {
+    public enum InputMode
+    {
+        Input,
+        Identify,
+        Verify
+    }
     class InputController
     {
-        protected PasswordActionBuilder PasswordActionBuilder { get; set; }
+        //protected PasswordActionBuilder PasswordActionBuilder { get; set; }
+        private InputMode inputMode;
         public PasswordAction PasswordAction { get; private set; }
         public Settings Settings { get; }
-
-        //public List<PasswordAction> PasswordActions { get => passwordActions; set => passwordActions = value; }
+        public InputMode InputMode { get { return inputMode; } set { inputMode = value;  Settings.InputMode = value; } }
 
         public InputController(Settings settings)
         {
-            PasswordActionBuilder = new PasswordActionBuilder();
+            //PasswordActionBuilder = new PasswordActionBuilder();
             Settings = settings;
-            //passwordActions = new List<PasswordAction>();
         }
 
         private void unpressPressedKeys(DateTime endTime)
@@ -33,14 +38,20 @@ namespace Task1
         }
         public void NextPasswordAction(string password,DateTime startTime)
         {
-            PasswordAction = PasswordActionBuilder.ConstructPasswordAction(password, startTime,Settings.User.Id);
+            if (InputMode == InputMode.Identify)
+            {
+                password = null;
+            }
+            PasswordAction =new PasswordAction( startTime,Settings.UserId,password);
             PasswordAction.SetPasswordFunction(PasswordFunctionStates.Start, 0);
-
-
         }
 
         public PasswordAction EndPasswordAction(DateTime endTime,string passwordValue)
         {
+            if (InputMode == InputMode.Identify)
+            {
+                PasswordAction.ValidPassword = passwordValue;
+            }
             if (passwordValue != PasswordAction.ValidPassword)
             {
                 throw new InvalidPasswordException("Invalid password exception");

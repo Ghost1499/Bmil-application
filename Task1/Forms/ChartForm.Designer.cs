@@ -60,7 +60,7 @@
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.mainChart.Series.Add(series1);
-            this.mainChart.Size = new System.Drawing.Size(880, 558);
+            this.mainChart.Size = new System.Drawing.Size(866, 558);
             this.mainChart.TabIndex = 7;
             this.mainChart.Text = "chart1";
             title1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -74,16 +74,16 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.mainFlowLayoutPanel.AutoScroll = true;
             this.mainFlowLayoutPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.mainFlowLayoutPanel.Location = new System.Drawing.Point(898, 12);
+            this.mainFlowLayoutPanel.Location = new System.Drawing.Point(884, 12);
             this.mainFlowLayoutPanel.Name = "mainFlowLayoutPanel";
-            this.mainFlowLayoutPanel.Size = new System.Drawing.Size(278, 558);
+            this.mainFlowLayoutPanel.Size = new System.Drawing.Size(380, 558);
             this.mainFlowLayoutPanel.TabIndex = 10;
             // 
             // ChartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1188, 582);
+            this.ClientSize = new System.Drawing.Size(1276, 582);
             this.Controls.Add(this.mainFlowLayoutPanel);
             this.Controls.Add(this.mainChart);
             this.Name = "ChartForm";
