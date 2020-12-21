@@ -19,7 +19,7 @@ namespace Task1.Forms.Containers
         {
             this.container = container;
         }
-        public IBuilder BuildContainer(Control parent, Control element = null, string elementText = null)
+        public IBuilder BuildContainer(Control parent, GroupBox element = null, string elementText = null)
         {
             LabelsContainer container = new LabelsContainer(parent, element, elementText);
             this.container.AddChild(container);
@@ -27,9 +27,9 @@ namespace Task1.Forms.Containers
         }
 
 
-        public void BuildElement(string sampleText, Func<double> updaterMethod, Control parent)
+        public void BuildElement(string sampleText, object dataSource, string property, Control parent)
         {
-            this.container.AddChild(new LabelElement(sampleText,updaterMethod,parent));
+            this.container.AddChild(new LabelElement(sampleText,dataSource,property,parent));
         }
 
         public LabelsContainer GetResult()

@@ -11,8 +11,8 @@ namespace Task1.Forms.Containers
     public interface IBuilder
     {
         void Reset();
-        void BuildElement(string sampleText, Func<double> updaterMethod, Control parent);
-        IBuilder BuildContainer(Control parent, Control element = null, string elementText = null);
+        void BuildElement(string sampleText,object dataSource, string property, Control parent);
+        IBuilder BuildContainer(Control parent, GroupBox element = null, string elementText = null);
         LabelsContainer GetResult();
     }
 }

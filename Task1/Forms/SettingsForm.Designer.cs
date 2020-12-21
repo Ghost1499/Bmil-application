@@ -89,7 +89,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(277, 192);
+            this.label3.Location = new System.Drawing.Point(312, 192);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(352, 37);
             this.label3.TabIndex = 5;
@@ -98,14 +98,14 @@
             // newUserTextBox
             // 
             this.newUserTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.newUserTextBox.Location = new System.Drawing.Point(330, 279);
+            this.newUserTextBox.Location = new System.Drawing.Point(359, 278);
             this.newUserTextBox.Name = "newUserTextBox";
             this.newUserTextBox.Size = new System.Drawing.Size(222, 44);
             this.newUserTextBox.TabIndex = 6;
             // 
             // addUserButton
             // 
-            this.addUserButton.Location = new System.Drawing.Point(377, 339);
+            this.addUserButton.Location = new System.Drawing.Point(409, 340);
             this.addUserButton.Name = "addUserButton";
             this.addUserButton.Size = new System.Drawing.Size(112, 44);
             this.addUserButton.TabIndex = 7;
@@ -117,7 +117,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(626, 450);
+            this.ClientSize = new System.Drawing.Size(696, 450);
             this.Controls.Add(this.addUserButton);
             this.Controls.Add(this.newUserTextBox);
             this.Controls.Add(this.label3);

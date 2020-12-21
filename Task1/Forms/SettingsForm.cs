@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Task1.main;
+using static Task1.MyMath.PasswordComplexity;
+using Task1.Exceptions;
 
 namespace Task1.Forms
 {
@@ -15,18 +17,22 @@ namespace Task1.Forms
     {
         MainForm mainForm;
         Settings settings;
-        public SettingsForm(MainForm mainForm, Settings settings)
+
+        public PasswordActionContext Context { get; set; }
+
+        public SettingsForm(MainForm mainForm, Settings settings, PasswordActionContext context)
         {
             InitializeComponent();
             this.mainForm = mainForm;
             this.settings = settings;
+            Context = context ?? throw new ArgumentNullException(nameof(context));
             Init();
         }
 
         private void Init()
         {
             passwordSampleTextBox.Text = settings.Password;
-            System.Array alphabets = Enum.GetValues(typeof(PasswordManager.PasswordsAlphabets));
+            System.Array alphabets = Enum.GetValues(typeof(PasswordsAlphabets));
             listBox1.DataSource = alphabets;
             listBox1.DisplayMember = "Name";
             //listBox1.ValueMember = "Value";
@@ -40,9 +46,9 @@ namespace Task1.Forms
             int value = (int)listBox1.SelectedValue;
 
             // получаем весь выделенный объект
-            PasswordManager.PasswordsAlphabets passwordsAlphabet = (PasswordManager.PasswordsAlphabets)listBox1.SelectedItem;
+            PasswordsAlphabets passwordsAlphabet = (PasswordsAlphabets)listBox1.SelectedItem;
             //MessageBox.Show(value.ToString() + ". " + passwordsAlphabet.ToString());
-            settings.Alphabet = (PasswordManager.PasswordsAlphabets)value;
+            settings.Alphabet = (PasswordsAlphabets)value;
             mainForm.UpdateLabels();
 
         }
@@ -64,18 +70,16 @@ namespace Task1.Forms
             string login = newUserTextBox.Text;
             if (login != "")
             {
-                if (!mainForm.PasswordManager.Users.Any((user) => user.Login == login))
+                try
                 {
-                    User user = new User(login);
-                    mainForm.PasswordManager.AddUser(user);
+                    mainForm.AuthenticationController.RegisterUser(login);
                     MessageBox.Show("Пользователь добавлен", "Уведомление", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-
                 }
-                else
+                catch ( BaseException ex)
                 {
-                    MessageBox.Show("Пользователь с таким логином уже существует", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    
                 }
             }
             else

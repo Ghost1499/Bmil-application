@@ -41,14 +41,14 @@
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.passwordComplexetyLabel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.mathExpectationLabel = new System.Windows.Forms.Label();
-            this.dispersionLabel = new System.Windows.Forms.Label();
-            this.sigmaLabel = new System.Windows.Forms.Label();
             this.usersListBox = new System.Windows.Forms.ListBox();
+            this.deleteUserButton = new System.Windows.Forms.Button();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.mainMenuStrip.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // passwordTextBox
@@ -64,7 +64,7 @@
             // 
             // acceptPasswordButton
             // 
-            this.acceptPasswordButton.Location = new System.Drawing.Point(464, 103);
+            this.acceptPasswordButton.Location = new System.Drawing.Point(388, 103);
             this.acceptPasswordButton.Name = "acceptPasswordButton";
             this.acceptPasswordButton.Size = new System.Drawing.Size(92, 48);
             this.acceptPasswordButton.TabIndex = 2;
@@ -152,7 +152,7 @@
             // 
             this.passwordComplexetyLabel.AutoSize = true;
             this.passwordComplexetyLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.passwordComplexetyLabel.Location = new System.Drawing.Point(586, 421);
+            this.passwordComplexetyLabel.Location = new System.Drawing.Point(386, 288);
             this.passwordComplexetyLabel.Name = "passwordComplexetyLabel";
             this.passwordComplexetyLabel.Size = new System.Drawing.Size(94, 37);
             this.passwordComplexetyLabel.TabIndex = 10;
@@ -162,95 +162,88 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(19, 421);
+            this.label4.Location = new System.Drawing.Point(12, 288);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(283, 37);
             this.label4.TabIndex = 11;
             this.label4.Text = "Сложность пароля";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(15, 223);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(409, 37);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Математическое ожидание";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(15, 292);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(417, 37);
-            this.label6.TabIndex = 13;
-            this.label6.Text = "Дисперсия в миллисекундах";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label7.Location = new System.Drawing.Point(15, 354);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(526, 37);
-            this.label7.TabIndex = 14;
-            this.label7.Text = "Среднеквадратическое отклонение";
-            // 
-            // mathExpectationLabel
-            // 
-            this.mathExpectationLabel.AutoSize = true;
-            this.mathExpectationLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.mathExpectationLabel.Location = new System.Drawing.Point(586, 223);
-            this.mathExpectationLabel.Name = "mathExpectationLabel";
-            this.mathExpectationLabel.Size = new System.Drawing.Size(94, 37);
-            this.mathExpectationLabel.TabIndex = 15;
-            this.mathExpectationLabel.Text = "None";
-            // 
-            // dispersionLabel
-            // 
-            this.dispersionLabel.AutoSize = true;
-            this.dispersionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.dispersionLabel.Location = new System.Drawing.Point(586, 292);
-            this.dispersionLabel.Name = "dispersionLabel";
-            this.dispersionLabel.Size = new System.Drawing.Size(94, 37);
-            this.dispersionLabel.TabIndex = 16;
-            this.dispersionLabel.Text = "None";
-            // 
-            // sigmaLabel
-            // 
-            this.sigmaLabel.AutoSize = true;
-            this.sigmaLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.sigmaLabel.Location = new System.Drawing.Point(586, 354);
-            this.sigmaLabel.Name = "sigmaLabel";
-            this.sigmaLabel.Size = new System.Drawing.Size(94, 37);
-            this.sigmaLabel.TabIndex = 17;
-            this.sigmaLabel.Text = "None";
             // 
             // usersListBox
             // 
             this.usersListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.usersListBox.FormattingEnabled = true;
             this.usersListBox.ItemHeight = 26;
-            this.usersListBox.Location = new System.Drawing.Point(886, 116);
+            this.usersListBox.Location = new System.Drawing.Point(690, 74);
             this.usersListBox.Name = "usersListBox";
-            this.usersListBox.Size = new System.Drawing.Size(147, 82);
+            this.usersListBox.Size = new System.Drawing.Size(291, 186);
             this.usersListBox.TabIndex = 18;
             this.usersListBox.SelectedIndexChanged += new System.EventHandler(this.usersListBox_SelectedIndexChanged);
+            // 
+            // deleteUserButton
+            // 
+            this.deleteUserButton.Location = new System.Drawing.Point(690, 287);
+            this.deleteUserButton.Name = "deleteUserButton";
+            this.deleteUserButton.Size = new System.Drawing.Size(212, 48);
+            this.deleteUserButton.TabIndex = 19;
+            this.deleteUserButton.Text = "Удалить пользователя";
+            this.deleteUserButton.UseVisualStyleBackColor = true;
+            this.deleteUserButton.Click += new System.EventHandler(this.deleteUserButton_Click);
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
+            this.radioButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.radioButton1.Location = new System.Drawing.Point(3, 3);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(164, 29);
+            this.radioButton1.TabIndex = 20;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Ввод паролей";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(173, 3);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(192, 29);
+            this.radioButton2.TabIndex = 21;
+            this.radioButton2.Text = "Идентификация";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(371, 3);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(166, 29);
+            this.radioButton3.TabIndex = 22;
+            this.radioButton3.Text = "Верификация";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.radioButton1);
+            this.flowLayoutPanel1.Controls.Add(this.radioButton2);
+            this.flowLayoutPanel1.Controls.Add(this.radioButton3);
+            this.flowLayoutPanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 157);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(628, 51);
+            this.flowLayoutPanel1.TabIndex = 23;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1133, 605);
+            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.deleteUserButton);
             this.Controls.Add(this.usersListBox);
-            this.Controls.Add(this.sigmaLabel);
-            this.Controls.Add(this.dispersionLabel);
-            this.Controls.Add(this.mathExpectationLabel);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.passwordComplexetyLabel);
             this.Controls.Add(this.samplePasswordLabel);
@@ -263,6 +256,8 @@
             this.Text = "Программа для сбора биометрических данных ввода пароля";
             this.mainMenuStrip.ResumeLayout(false);
             this.mainMenuStrip.PerformLayout();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -276,12 +271,6 @@
         private System.Windows.Forms.ToolStripMenuItem статистикаToolStripMenuItem;
         private System.Windows.Forms.Label passwordComplexetyLabel;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label mathExpectationLabel;
-        private System.Windows.Forms.Label dispersionLabel;
-        private System.Windows.Forms.Label sigmaLabel;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem passwordsDurationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem typingDimanicToolStripMenuItem;
@@ -289,6 +278,11 @@
         private System.Windows.Forms.ToolStripMenuItem passwordsVelocityToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem functionToolStripMenuItem;
         private System.Windows.Forms.ListBox usersListBox;
+        private System.Windows.Forms.Button deleteUserButton;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }
 

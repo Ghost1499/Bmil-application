@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -11,96 +12,102 @@ using System.Windows.Forms.DataVisualization.Charting;
 using Task1.Exceptions;
 using Task1.Forms;
 using Task1.main;
+using Task1.MyMath;
+using Task1.Main;
 
 namespace Task1
 {
     public partial class MainForm : Form
     {
-        InputController inputController;
-        Settings settings;
-        Statistics statistics;
-        PasswordsDurattionsChartForm passwordsDurattionsChartForm;
         SettingsForm settingsForm;
+        public PasswordActionContext Context { get; private set; }
+        public AuthenticationController AuthenticationController { get; private set; }
 
-        public delegate void UpdatePasswordsHandler();
-        public event UpdatePasswordsHandler PasswordsUpdate;
+        //public delegate void UpdatePasswordsHandler();
+        public event Action PasswordsUpdate;
+        public event Action ChangeUser;
 
-        public Statistics StatisticsManager { get => statistics; set => statistics = value; }
-
-        public List<PasswordAction> PasswordActions => PasswordManager.PasswordActions;
-        public PasswordAction PasswordAction { get { return PasswordActions.Last(); } }
-
-        //public PasswordAction PasswordAction {
-        //    get {
-        //        if (passwordActions.Count() > 0)
-        //        {
-        //            return passwordActions.Last();
-        //        }
-        //        else return null;
-        //    } }
-
-        internal Settings Settings { get => settings; set => settings = value; }
-        public PasswordManager PasswordManager { get; set; }
+        public Settings Settings { get; set; }
+        private InputController InputController { get;  set ; }
 
         public MainForm()
         {
             InitializeComponent();
-            settings = new Settings();
-            PasswordManager = new PasswordManager(settings);
-            //PasswordActions = PasswordManager.PasswordActions;
-           
-            //settings = new Settings("passWoRdtoTESt1882",PasswordManager.PasswordsAlphabets.А3);
-            inputController = new InputController(settings);
-            statistics = new Statistics(PasswordManager);
-            //passwordActions = new List<PasswordAction>();
-            Init();
+            Settings = new Settings();
+            //Repository = new PasswordActionRepository(Settings);
+            Context = new PasswordActionContext();
+            AuthenticationController = new AuthenticationController(Context,Settings);
 
-            //double[] vals = new double[] { 1, 2, 3, 10 };
-            //label1.Text = StatisticsManager.MathExpectation(vals).ToString();
-            //label2.Text = StatisticsManager.Dispersion(vals).ToString();
+            InputController = new InputController(Settings);
+
+            Init();
         }
 
         private void Init()
         {
             usersListBox.DisplayMember = "Login";
             usersListBox.ValueMember = "Id";
-            usersListBox.DataSource = PasswordManager.Users; 
+            usersListBox.DataSource = Context.Users.Local.ToBindingList(); 
 
-            usersListBox.SelectedIndexChanged += usersListBox_SelectedIndexChanged;
+            //usersListBox.SelectedIndexChanged += usersListBox_SelectedIndexChanged;
 
             acceptPasswordButton.Select();
+
             InputLanguage.CurrentInputLanguage = InputLanguage.FromCulture(new System.Globalization.CultureInfo("en-US"));
             UpdateLabels();
-            UpdateValues();
+            //UpdateValues();
         }
         public void UpdateLabels()
         {
-            samplePasswordLabel.Text =  settings.Password;
-            passwordComplexetyLabel.Text = Math.Round(PasswordManager.CheckPasswordComplexity(settings.Password, settings.Alphabet),2).ToString();
+            samplePasswordLabel.Text =  Settings.Password;
+            passwordComplexetyLabel.Text = Math.Round(PasswordComplexity.CheckPasswordComplexity(Settings.Password, Settings.Alphabet),2).ToString();
         }
-        private void UpdateValues()
-        {
-            mathExpectationLabel.Text = Math.Round(statistics.GetPasswordsMathExpectasion(),3).ToString();
-            dispersionLabel.Text = Math.Round(statistics.GetPasswordsDispersion(),3).ToString();
-            sigmaLabel.Text =Math.Round(statistics.GetPasswordsSigma(),3).ToString();
+        //private void UpdateValues()
+        //{
+        //    mathExpectationLabel.Text = Math.Round(statistics.GetPasswordsMathExpectasion(),3).ToString();
+        //    dispersionLabel.Text = Math.Round(statistics.GetPasswordsDispersion(),3).ToString();
+        //    sigmaLabel.Text = Math.Round(statistics.GetPasswordsSigma(),3).ToString();
          
-        }
-
-
+        //}
 
         private void AcceptPassword()
         {
             try
             {
-                if (inputController.PasswordAction == null)
+                if (InputController.PasswordAction == null)
                 {
                     MessageBox.Show("Введите пароль!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                PasswordAction passwordAction = inputController.EndPasswordAction(DateTime.Now, passwordTextBox.Text);
-                PasswordManager.InsertPasswordAction(passwordAction);
-                PasswordsUpdate?.Invoke();
-                UpdateValues();
+                PasswordAction passwordAction = InputController.EndPasswordAction(DateTime.Now, passwordTextBox.Text);
+                switch (InputController.InputMode)
+                {
+                    case InputMode.Input:
+                        Context.PasswordActions.Add(passwordAction);
+                        Context.SaveChanges();
+                        PasswordsUpdate?.Invoke();
+                        break;
+                    case InputMode.Identify:
+                        User user= AuthenticationController.IdentifyUser(passwordAction);
+                        MessageBox.Show($"Идентифецирован пользователь {user.Login} с id={user.Id}", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        break;
+                    case InputMode.Verify:
+                        bool result=AuthenticationController.VerifyUser(passwordAction);
+                        if (result)
+                        {
+                            MessageBox.Show("Пользователь подтвержден", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("Польльзователь не подтвержден", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        }
+                        break;
+                    default:
+                        break;
+                }
+               
             }
             catch (InvalidPasswordException)
             {
@@ -115,7 +122,7 @@ namespace Task1
         private void StartTypingPassword(object sender, EventArgs e)
         {
             this.passwordTextBox.Clear();
-            inputController.NextPasswordAction(settings.Password, DateTime.Now);
+            InputController.NextPasswordAction(Settings.Password, DateTime.Now);
 
         }
 
@@ -138,80 +145,111 @@ namespace Task1
                 AcceptPassword();
                 return;
             }
-            inputController.KeyDown(e, DateTime.Now);
+            InputController.KeyDown(e, DateTime.Now);
         }
 
         private void passwordTextBox_KeyUp(object sender, KeyEventArgs e)
         {
-            inputController.KeyUp(e, DateTime.Now);
+            InputController.KeyUp(e, DateTime.Now);
         }
-
-        //private void histogramToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    histogramForm = new HistogramForm(this,StatisticsManager);
-        //    histogramForm.Show();
-        //}
-
-        //private void passwordDinamicToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    dinamicForm = new PasswordDinamicForm(this);
-        //    dinamicForm.Show();
-        //}
-
-        //private void keyPressDurationToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    pressDurationChartForm = new PressDurationChartForm(this);
-        //    pressDurationChartForm.Show();
-        //}
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            settingsForm = new SettingsForm(this, settings);
+            settingsForm = new SettingsForm(this, Settings,Context);
             settingsForm.Show();
         }
 
         private void passwordsDurationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            passwordsDurattionsChartForm = new PasswordsDurattionsChartForm(this,StatisticsManager);
+
+            var passwordsDurattionsChartForm = new PasswordsDurattionsChartForm(this);
             passwordsDurattionsChartForm.Show();
         }
 
         private void typingDimanicToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TypingDinamicChartForm typingDinamicChartForm= new TypingDinamicChartForm(this,statistics);
-            typingDinamicChartForm.Show();
+            //TypingDinamicChartForm typingDinamicChartForm= new TypingDinamicChartForm(this);
+            //typingDinamicChartForm.Show();
         }
 
         private void passwordKeyPressDurationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            KeysPressDurationChartForm keysPressDurationChartForm = new KeysPressDurationChartForm(this, statistics);
-            keysPressDurationChartForm.Show();
+            //KeysPressDurationChartForm keysPressDurationChartForm = new KeysPressDurationChartForm(this, statistics);
+            //keysPressDurationChartForm.Show();
         }
 
         private void passwordsVelocityToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PasswordsVelocityChartForm passwordsVelocityChartForm = new PasswordsVelocityChartForm(this, statistics);
-            passwordsVelocityChartForm.Show();
+            //PasswordsVelocityChartForm passwordsVelocityChartForm = new PasswordsVelocityChartForm(this, statistics);
+            //passwordsVelocityChartForm.Show();
         }
 
         private void functionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FunctionChartForm functionChartForm = new FunctionChartForm(this, statistics);
-            functionChartForm.Show();
+            //FunctionChartForm functionChartForm = new FunctionChartForm(this, statistics);
+            //functionChartForm.Show();
         }
 
         private void usersListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             // получаем id выделенного объекта
-            int value = (int)usersListBox.SelectedValue;
+            int id = (int)usersListBox.SelectedValue;
 
+            AuthenticationController.ChangeUser(id);
+            
             // получаем весь выделенный объект
-            User user = (User)usersListBox.SelectedItem;
+            //User user = (User)usersListBox.SelectedItem;
             //MessageBox.Show(value.ToString() + ". " + passwordsAlphabet.ToString());
-            settings.User = user;
-            PasswordManager.UpdatePasswordAtions();
-            PasswordsUpdate?.Invoke();
+            //Settings.User = user;
+            //if (!Context.Entry(Settings.User).Collection(u => u.PasswordActions).IsLoaded)
+            //{
+        
+            //    Context.Entry(Settings.User).Collection(u => u.PasswordActions).Load();
+            //}
+            
+            //Repository.UpdatePasswordAtions();
+            ChangeUser?.Invoke();
+            //PasswordsUpdate?.Invoke();
         }
 
+        private void deleteUserButton_Click(object sender, EventArgs e)
+        {
+            int id = (int)usersListBox.SelectedValue;
+            AuthenticationController.DeleteUser();
+            MessageBox.Show("Пользователь удален", "Уведомление", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            
+
+            ChangeUser?.Invoke();
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            // приводим отправителя к элементу типа RadioButton
+            RadioButton radioButton; //= (RadioButton)sender;
+
+            if (radioButton1.Checked)
+            {
+                radioButton = radioButton1;
+                InputController.InputMode = InputMode.Input;
+                MessageBox.Show("Выбран режим " + radioButton.Text);
+            }
+            else if (radioButton2.Checked)
+            {
+                radioButton = radioButton2;
+                InputController.InputMode = InputMode.Identify;
+
+                MessageBox.Show("Выбран режим " + radioButton.Text);
+
+            }
+            else if (radioButton3.Checked)
+            {
+                radioButton = radioButton3;
+                InputController.InputMode = InputMode.Verify;
+
+                MessageBox.Show("Выбран режим " + radioButton.Text);
+            }
+            else throw new Exception("Ошибка с Radiobutton");
+            
+        }
     }
 }

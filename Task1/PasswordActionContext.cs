@@ -8,7 +8,7 @@ using Task1.main;
 
 namespace Task1
 {
-    class PasswordActionContext:DbContext
+    public class PasswordActionContext:DbContext
     {
         public PasswordActionContext() : base("DbConnection")
         {
