@@ -28,7 +28,7 @@ namespace Task1
         public event Action ChangeUser;
 
         public Settings Settings { get; set; }
-        private InputController InputController { get;  set ; }
+        private InputController InputController { get; set; }
 
         public MainForm()
         {
@@ -36,7 +36,7 @@ namespace Task1
             Settings = new Settings();
             //Repository = new PasswordActionRepository(Settings);
             Context = new PasswordActionContext();
-            AuthenticationController = new AuthenticationController(Context,Settings);
+            AuthenticationController = new AuthenticationController(Context, Settings);
 
             InputController = new InputController(Settings);
 
@@ -47,7 +47,7 @@ namespace Task1
         {
             usersListBox.DisplayMember = "Login";
             usersListBox.ValueMember = "Id";
-            usersListBox.DataSource = Context.Users.Local.ToBindingList(); 
+            usersListBox.DataSource = Context.Users.Local.ToBindingList();
 
             //usersListBox.SelectedIndexChanged += usersListBox_SelectedIndexChanged;
 
@@ -59,15 +59,15 @@ namespace Task1
         }
         public void UpdateLabels()
         {
-            samplePasswordLabel.Text =  Settings.Password;
-            passwordComplexetyLabel.Text = Math.Round(PasswordComplexity.CheckPasswordComplexity(Settings.Password, Settings.Alphabet),2).ToString();
+            samplePasswordLabel.Text = Settings.Password;
+            passwordComplexetyLabel.Text = Math.Round(PasswordComplexity.CheckPasswordComplexity(Settings.Password, Settings.Alphabet), 2).ToString();
         }
         //private void UpdateValues()
         //{
         //    mathExpectationLabel.Text = Math.Round(statistics.GetPasswordsMathExpectasion(),3).ToString();
         //    dispersionLabel.Text = Math.Round(statistics.GetPasswordsDispersion(),3).ToString();
         //    sigmaLabel.Text = Math.Round(statistics.GetPasswordsSigma(),3).ToString();
-         
+
         //}
 
         private void AcceptPassword()
@@ -80,6 +80,7 @@ namespace Task1
                     return;
                 }
                 PasswordAction passwordAction = InputController.EndPasswordAction(DateTime.Now, passwordTextBox.Text);
+                double m, sigma, duration, different;
                 switch (InputController.InputMode)
                 {
                     case InputMode.Input:
@@ -88,12 +89,24 @@ namespace Task1
                         PasswordsUpdate?.Invoke();
                         break;
                     case InputMode.Identify:
-                        User user= AuthenticationController.IdentifyUser(passwordAction);
-                        MessageBox.Show($"Идентифецирован пользователь {user.Login} с id={user.Id}", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        User user = AuthenticationController.IdentifyUser(passwordAction, out m, out duration,out different);
+                        if (user == null)
+                        {
+                            MessageBox.Show($"Пользователь не идентифицирован\n" +
+                                $"Длительность ввода пароля - {duration}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else
+                        {
+                            MessageBox.Show($"Идентифецирован пользователь {user.Login} с id={user.Id}\n" +
+                                $"Математическое ожидание длительностей вводов данного пароля у этого пользователя - {m}\n" +
+                                $"Длительность ввода пароля - {duration}\n"+
+                                $"Разница - {different}",
+                                "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        }
                         break;
                     case InputMode.Verify:
-                        double m, sigma, duration;
-                        bool result=AuthenticationController.VerifyUser(passwordAction,out m,out sigma,out duration);
+                        bool result = AuthenticationController.VerifyUser(passwordAction, out m, out sigma, out duration);
                         if (result)
                         {
                             MessageBox.Show($"Пользователь подтвержден \n" +
@@ -105,8 +118,8 @@ namespace Task1
                         else if (m != 0 && sigma != 0)
                         {
                             MessageBox.Show($"Пользователь не подтвержден \n" +
-                                $" Математическое ожидание паролей - {m} \n" +
-                                $" Среднеквадартическое отклонение - {sigma} \n" +
+                                $"Математическое ожидание паролей - {m} \n" +
+                                $"Среднеквадартическое отклонение - {sigma} \n" +
                                 $"Длительность введенного пароля - {duration}", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                         else
@@ -118,7 +131,7 @@ namespace Task1
                     default:
                         break;
                 }
-               
+
             }
             catch (InvalidPasswordException)
             {
@@ -166,7 +179,7 @@ namespace Task1
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            settingsForm = new SettingsForm(this, Settings,Context);
+            settingsForm = new SettingsForm(this, Settings, Context);
             settingsForm.Show();
         }
 
@@ -207,17 +220,17 @@ namespace Task1
             int id = (int)usersListBox.SelectedValue;
 
             AuthenticationController.ChangeUser(id);
-            
+
             // получаем весь выделенный объект
             //User user = (User)usersListBox.SelectedItem;
             //MessageBox.Show(value.ToString() + ". " + passwordsAlphabet.ToString());
             //Settings.User = user;
             //if (!Context.Entry(Settings.User).Collection(u => u.PasswordActions).IsLoaded)
             //{
-        
+
             //    Context.Entry(Settings.User).Collection(u => u.PasswordActions).Load();
             //}
-            
+
             //Repository.UpdatePasswordAtions();
             ChangeUser?.Invoke();
             //PasswordsUpdate?.Invoke();
@@ -228,7 +241,7 @@ namespace Task1
             int id = (int)usersListBox.SelectedValue;
             AuthenticationController.DeleteUser();
             MessageBox.Show("Пользователь удален", "Уведомление", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            
+
 
             ChangeUser?.Invoke();
         }
@@ -268,7 +281,7 @@ namespace Task1
                 MessageBox.Show("Выбран режим " + radioButton.Text);
             }
             else throw new Exception("Ошибка с Radiobutton");
-            
+
         }
 
         private void userInformationToolStripMenuItem_Click(object sender, EventArgs e)

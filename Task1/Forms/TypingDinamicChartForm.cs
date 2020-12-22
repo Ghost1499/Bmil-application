@@ -67,7 +67,7 @@ namespace Task1.Forms
         protected override void InitChart()
         {
             base.InitChart();
-            chart.Titles[0].Text = "Длительность нажатия клавиш ";
+            chart.Titles[0].Text = "Динамика ввода";
             mainChart.ChartAreas.Last().AxisY.Title = "миллисекунд";
 
             //chart.Series.Last().Points.DataBindY(daytimePasswords.PasswordActions.Local, "TimeDuration");
