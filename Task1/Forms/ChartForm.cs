@@ -35,7 +35,7 @@ namespace Task1.Forms
 
             //mainForm.Context.PasswordActions.Local.CollectionChanged += UpdateForm;
             mainForm.PasswordsUpdate += UpdateForm;
-            mainForm.ChangeUser += Clear;
+            mainForm.ChangeUser += ReloadData;
             Init();
         }
 
@@ -45,6 +45,8 @@ namespace Task1.Forms
             InitLabelsGroupBox();
             UpdateForm();
         }
+        protected abstract void LoadData();
+        protected abstract void ReloadData();
         protected virtual void InitChart()
         {
 
@@ -56,19 +58,14 @@ namespace Task1.Forms
 
         protected virtual void UpdateForm(/*object sender = null, NotifyCollectionChangedEventArgs e = null*/)
         {
+            LoadData();
+            UpdateChart();
             UpdateLablesGroupBox();
         }
 
-        public abstract void Clear();
-        //protected abstract void UpdateChart();
-        //{
-        //    T[] xValues;
-        //    double[] yValues;
-        //    getData<T>(out xValues, out yValues);
-        //    UpdateChartByData<T>(yValues, xValues);
-        //    //dataSenderFunc<T> dataSenderFunc = dataSenderFunc<T>(out xValues, out yValues);
+        //public abstract void Clear();
+        protected abstract void UpdateChart();
 
-        //}
 
 
 
@@ -99,7 +96,7 @@ namespace Task1.Forms
             return value;
         }
 
-        protected virtual void UpdateLablesGroupBox()
+        protected  void UpdateLablesGroupBox()
         {
             foreach (var item in LabelElements)
             {
