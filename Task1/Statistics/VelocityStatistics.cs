@@ -14,10 +14,7 @@ namespace Task1.Statistics
         {
         }
 
-        public override double this[int index]
-        {
-            get { return Collection.ElementAt(index).TimeDuration; }
-        }
+
 
         public IEnumerator<double> GetEnumerator()
         {

@@ -58,6 +58,7 @@ namespace Task1
             }
             unpressPressedKeys(endTime);
             PasswordAction.EndTime = endTime;
+            PasswordAction.TypedSymbols = PasswordAction.GetTypedSymbols();
             PasswordAction oldPasswordAction = this.PasswordAction;
             this.PasswordAction = null;
             return oldPasswordAction;

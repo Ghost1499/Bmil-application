@@ -92,11 +92,22 @@ namespace Task1
                         MessageBox.Show($"Идентифецирован пользователь {user.Login} с id={user.Id}", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
                     case InputMode.Verify:
-                        bool result=AuthenticationController.VerifyUser(passwordAction);
+                        double m, sigma, duration;
+                        bool result=AuthenticationController.VerifyUser(passwordAction,out m,out sigma,out duration);
                         if (result)
                         {
-                            MessageBox.Show("Пользователь подтвержден", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show($"Пользователь подтвержден \n" +
+                                $"Математическое ожидание паролей - {m} \n" +
+                                $"Среднеквадартическое отклонение - {sigma} \n" +
+                                $"Длительность введенного пароля - {duration}", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                        }
+                        else if (m != 0 && sigma != 0)
+                        {
+                            MessageBox.Show($"Пользователь не подтвержден \n" +
+                                $" Математическое ожидание паролей - {m} \n" +
+                                $" Среднеквадартическое отклонение - {sigma} \n" +
+                                $"Длительность введенного пароля - {duration}", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                         else
                         {
@@ -168,14 +179,14 @@ namespace Task1
 
         private void typingDimanicToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //TypingDinamicChartForm typingDinamicChartForm= new TypingDinamicChartForm(this);
-            //typingDinamicChartForm.Show();
+            TypingDinamicChartForm typingDinamicChartForm = new TypingDinamicChartForm(this);
+            typingDinamicChartForm.Show();
         }
 
         private void passwordKeyPressDurationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //KeysPressDurationChartForm keysPressDurationChartForm = new KeysPressDurationChartForm(this, statistics);
-            //keysPressDurationChartForm.Show();
+            var keysPressDurationChartForm = new KeysPressDurationChartForm(this);
+            keysPressDurationChartForm.Show();
         }
 
         private void passwordsVelocityToolStripMenuItem_Click(object sender, EventArgs e)

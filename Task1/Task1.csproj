@@ -65,6 +65,8 @@
     <Compile Include="Forms\UserForm.Designer.cs">
       <DependentUpon>UserForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Statistics\PressDurationStatistics.cs" />
+    <Compile Include="Statistics\TypingDinamicStatistics.cs" />
     <Compile Include="Statistics\VelocityStatistics.cs" />
     <None Include="Forms\Containers\ContainersBuilder.cs" />
     <Compile Include="Forms\Containers\IBuilder.cs" />
@@ -86,12 +88,12 @@
     <None Include="Forms\FunctionChartForm.Designer.cs">
       <DependentUpon>FunctionChartForm.cs</DependentUpon>
     </None>
-    <None Include="Forms\KeysPressDurationChartForm.cs">
+    <Compile Include="Forms\KeysPressDurationChartForm.cs">
       <SubType>Form</SubType>
-    </None>
-    <None Include="Forms\KeysPressDurationChartForm.Designer.cs">
+    </Compile>
+    <Compile Include="Forms\KeysPressDurationChartForm.Designer.cs">
       <DependentUpon>KeysPressDurationChartForm.cs</DependentUpon>
-    </None>
+    </Compile>
     <Compile Include="Forms\PasswordsDurattionsChartForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,12 +106,12 @@
     <Compile Include="Forms\SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
-    <None Include="Forms\TypingDinamicChartForm.cs">
+    <Compile Include="Forms\TypingDinamicChartForm.cs">
       <SubType>Form</SubType>
-    </None>
-    <None Include="Forms\TypingDinamicChartForm.Designer.cs">
+    </Compile>
+    <Compile Include="Forms\TypingDinamicChartForm.Designer.cs">
       <DependentUpon>TypingDinamicChartForm.cs</DependentUpon>
-    </None>
+    </Compile>
     <Compile Include="MyMath\HaarFunction.cs" />
     <Compile Include="MyMath\StatisticsMethods.cs" />
     <Compile Include="Main\InputController.cs" />

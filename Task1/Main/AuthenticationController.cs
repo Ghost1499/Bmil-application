@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Task1.main;
 using Task1.Exceptions;
+using Task1.MyMath;
 
 namespace Task1.Main
 {
@@ -58,17 +59,36 @@ namespace Task1.Main
             return user;
         }
 
-        public bool VerifyUser(PasswordAction passwordAction)
+        public bool VerifyUser(PasswordAction passwordAction,out double m, out double sigma, out double duration )
         {
             using (PasswordActionContext tempContext=new PasswordActionContext())
             {
-                List<PasswordAction> passwordActions = tempContext.PasswordActions
+                m = 0;
+                sigma = 0;
+                duration = TimeSpanConverter.TotalSeconds(passwordAction.TimeDuration);
+                  
+                //bool result = true;
+                tempContext.PasswordActions
                     .Include(p => p.SymbolActions)
                     .Where(p => p.UserId == passwordAction.UserId)
                     .Where(p => p.ValidPassword == passwordAction.ValidPassword)
-                    .ToList();
-                if (passwordActions.Count == 0)
+                    .Load();
+
+                if (tempContext.PasswordActions.Local.Count == 0)
+                {
+                    //result = false;
                     return false;
+
+                }
+                
+                DurationsStatistics durationStatistics = new DurationsStatistics(tempContext.PasswordActions.Local);
+                m = durationStatistics.MathExpectation;
+                sigma = durationStatistics.Sigma;
+                if(Math.Abs(m- duration )> sigma)
+                {
+                    return false;
+                }
+
             }
             return true;
         }

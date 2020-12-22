@@ -15,10 +15,10 @@ namespace Task1
         {
         }
 
-        public override double this[int index]
-        {
-            get { return Collection.ElementAt(index).TimeDuration; }
-        }
+        //public override double this[int index]
+        //{
+        //    get { return Collection.ElementAt(index).TimeDuration; }
+        //}
 
         public IEnumerator<double> GetEnumerator()
         {

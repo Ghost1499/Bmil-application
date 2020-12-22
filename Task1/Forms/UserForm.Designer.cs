@@ -30,6 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             this.passwordActionsGridView = new System.Windows.Forms.DataGridView();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.idLabel = new System.Windows.Forms.Label();
+            this.loginLabel = new System.Windows.Forms.Label();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.validPasswordDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.timeDurationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -37,11 +42,6 @@
             this.overlaysCountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.endTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.passwordActionBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.idLabel = new System.Windows.Forms.Label();
-            this.loginLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.passwordActionsGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.passwordActionBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -69,6 +69,56 @@
             this.passwordActionsGridView.RowTemplate.Height = 28;
             this.passwordActionsGridView.Size = new System.Drawing.Size(956, 507);
             this.passwordActionsGridView.TabIndex = 0;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label2.Location = new System.Drawing.Point(12, 70);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(28, 25);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Id";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label1.Location = new System.Drawing.Point(12, 104);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(68, 25);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Логин";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.label3.Location = new System.Drawing.Point(57, 12);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(189, 32);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Информация";
+            // 
+            // idLabel
+            // 
+            this.idLabel.AutoSize = true;
+            this.idLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.idLabel.Location = new System.Drawing.Point(86, 70);
+            this.idLabel.Name = "idLabel";
+            this.idLabel.Size = new System.Drawing.Size(48, 25);
+            this.idLabel.TabIndex = 4;
+            this.idLabel.Text = "Нет";
+            // 
+            // loginLabel
+            // 
+            this.loginLabel.AutoSize = true;
+            this.loginLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.loginLabel.Location = new System.Drawing.Point(86, 104);
+            this.loginLabel.Name = "loginLabel";
+            this.loginLabel.Size = new System.Drawing.Size(48, 25);
+            this.loginLabel.TabIndex = 5;
+            this.loginLabel.Text = "Нет";
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -110,56 +160,6 @@
             // passwordActionBindingSource
             // 
             this.passwordActionBindingSource.DataSource = typeof(Task1.PasswordAction);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label2.Location = new System.Drawing.Point(12, 70);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(28, 25);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Id";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label1.Location = new System.Drawing.Point(12, 136);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 25);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Логин";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.label3.Location = new System.Drawing.Point(57, 12);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(189, 32);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Информация";
-            // 
-            // idLabel
-            // 
-            this.idLabel.AutoSize = true;
-            this.idLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.idLabel.Location = new System.Drawing.Point(150, 70);
-            this.idLabel.Name = "idLabel";
-            this.idLabel.Size = new System.Drawing.Size(48, 25);
-            this.idLabel.TabIndex = 4;
-            this.idLabel.Text = "Нет";
-            // 
-            // loginLabel
-            // 
-            this.loginLabel.AutoSize = true;
-            this.loginLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.loginLabel.Location = new System.Drawing.Point(150, 136);
-            this.loginLabel.Name = "loginLabel";
-            this.loginLabel.Size = new System.Drawing.Size(48, 25);
-            this.loginLabel.TabIndex = 5;
-            this.loginLabel.Text = "Нет";
             // 
             // UserForm
             // 

@@ -14,13 +14,10 @@ namespace Task1
 {
     public class PasswordAction
     {
-        private List<SymbolAction> symbolActions;
-        private List<SymbolAction> pressedKeys;
-        private int A;
-
         [NotMapped]
         private SortedList<double, int> function;
 
+        public string[] TypedSymbols { get; set; }
         public SortedList<double, int> NormalizedFunction()
         {
             if (TimeDuration < (0 + double.Epsilon)){
@@ -55,10 +52,10 @@ namespace Task1
         [Required]
         public DateTime StartTime { get; set; }
 
-        public List<SymbolAction> SymbolActions { get => symbolActions; set => symbolActions = value; }
+        public List<SymbolAction> SymbolActions { get; set; }
 
         [NotMapped]
-        public List<SymbolAction> PressedKeys { get => pressedKeys; set => pressedKeys = value; }
+        public List<SymbolAction> PressedKeys { get; set; }
 
         public int OverlaysCount { get; set; }
 
@@ -66,6 +63,13 @@ namespace Task1
         public DateTime EndTime { get; set; }
         public int? UserId { get; set; }
 
+        [NotMapped]
+        public int A { get; set; }
+
+        public double GetOverlaysCount()
+        {
+            return OverlaysCount;
+        }
         public PasswordAction()
         {
             constructPasswordAction();
@@ -86,11 +90,12 @@ namespace Task1
 
         private void constructPasswordAction()
         {
-            this.symbolActions = new List<SymbolAction>();
-            this.pressedKeys = new List<SymbolAction>();
+            this.SymbolActions = new List<SymbolAction>();
+            this.PressedKeys = new List<SymbolAction>();
             this.function = new SortedList<double, int>();
             this.OverlaysCount = 0;
             this.A = 1;
+            TypedSymbols = GetTypedSymbols();
         }
 
         public int GetPreseedKeyIndex(Keys keyCode,bool isShiftPressed)
@@ -123,7 +128,7 @@ namespace Task1
         public string[] GetTypedSymbols()
         {
             string[] result = new string[SymbolActions.Count()];
-            for (int i = 0; i < symbolActions.Count(); i++)
+            for (int i = 0; i < SymbolActions.Count(); i++)
             {
                 result[i] = SymbolActions[i].KeyValue.ToString();
             }
@@ -150,7 +155,7 @@ namespace Task1
         private void buildFunction()
         {
             SetPasswordFunction(PasswordFunctionStates.Start, 0);
-            foreach(var symbolAction in symbolActions)
+            foreach(var symbolAction in SymbolActions)
             {
                 SetPasswordFunction(PasswordFunctionStates.KeyDown, symbolAction.KeyDownTime);
                 SetPasswordFunction(PasswordFunctionStates.KeyUp, symbolAction.KeyUpTime);

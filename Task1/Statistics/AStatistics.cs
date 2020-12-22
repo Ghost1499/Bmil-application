@@ -14,9 +14,9 @@ namespace Task1
     public abstract class AStatistics<T, V, U>
     {
         protected ObservableCollection<T> Collection { get; private set; }
-        protected double MathExpectation { get; set; }
-        protected double Dispersion { get; set; }
-        protected double Sigma { get; set; }
+        public double MathExpectation { get; set; }
+        public double Dispersion { get; set; }
+        public double Sigma { get; set; }
 
         public double GetMathExpectation() => MathExpectation;
         public double GetDispersion() => Dispersion;
@@ -40,7 +40,7 @@ namespace Task1
             Sigma = StatisticsMethods.Sigma(ToIEnumerable(), Dispersion);
         }
 
-        public abstract U this[int index] { get; }
+        //public abstract U this[int index] { get; }
         public abstract IEnumerable<V> ToIEnumerable();
 
         //public virtual IEnumerator<V> GetEnumerator()

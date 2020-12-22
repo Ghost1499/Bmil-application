@@ -108,6 +108,7 @@ namespace Task1.Forms
         protected void ChartForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             mainForm.PasswordsUpdate -= UpdateForm;
+            mainForm.ChangeUser -= ReloadData;
         }
     }
 }
