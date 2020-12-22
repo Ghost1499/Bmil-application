@@ -180,8 +180,8 @@ namespace Task1
 
         private void passwordsVelocityToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //PasswordsVelocityChartForm passwordsVelocityChartForm = new PasswordsVelocityChartForm(this, statistics);
-            //passwordsVelocityChartForm.Show();
+            PasswordsVelocityChartForm passwordsVelocityChartForm = new PasswordsVelocityChartForm(this);
+            passwordsVelocityChartForm.Show();
         }
 
         private void functionToolStripMenuItem_Click(object sender, EventArgs e)
@@ -224,6 +224,8 @@ namespace Task1
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
+            if (!((RadioButton)sender).Checked)
+                return;
             // приводим отправителя к элементу типа RadioButton
             RadioButton radioButton; //= (RadioButton)sender;
 
@@ -231,12 +233,16 @@ namespace Task1
             {
                 radioButton = radioButton1;
                 InputController.InputMode = InputMode.Input;
+                samplePasswordLabel.Text = Settings.Password;
+
                 MessageBox.Show("Выбран режим " + radioButton.Text);
+
             }
             else if (radioButton2.Checked)
             {
                 radioButton = radioButton2;
                 InputController.InputMode = InputMode.Identify;
+                samplePasswordLabel.Text = "Введите пароль для идентификации";
 
                 MessageBox.Show("Выбран режим " + radioButton.Text);
 
@@ -245,11 +251,19 @@ namespace Task1
             {
                 radioButton = radioButton3;
                 InputController.InputMode = InputMode.Verify;
+                samplePasswordLabel.Text = "Введите пароль для верификации";
+
 
                 MessageBox.Show("Выбран режим " + radioButton.Text);
             }
             else throw new Exception("Ошибка с Radiobutton");
             
+        }
+
+        private void userInformationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var userForm = new UserForm(this);
+            userForm.Show();
         }
     }
 }

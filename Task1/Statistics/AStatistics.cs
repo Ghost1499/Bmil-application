@@ -73,31 +73,34 @@ namespace Task1
         //        yield return Collection[i];
         //    }
         //}
+
+        
     }
 
     public class StatisticsEnumerator<T, V> : IEnumerator<T>
     {
-        T[] collection;
-        int position = -1;
-        public StatisticsEnumerator(T[] collection)
+        protected ObservableCollection<T> collection;
+        protected int position = -1;
+        public StatisticsEnumerator(ObservableCollection<T> collection)
         {
             this.collection = collection;
         }
-        public object Current
+        public virtual object Current
         {
             get
             {
-                return this.Current;
+                if (position == -1 || position >= collection.Count())
+                    throw new InvalidOperationException();
+                return collection[position];
             }
+            
         }
 
         T IEnumerator<T>.Current
         {
             get
             {
-                if (position == -1 || position >= collection.Length)
-                    throw new InvalidOperationException();
-                return collection[position];
+                return (T)Current;
             }
         }
 
@@ -108,7 +111,7 @@ namespace Task1
 
         public bool MoveNext()
         {
-            if (position < collection.Length - 1)
+            if (position < collection.Count() - 1)
             {
                 position++;
                 return true;
@@ -121,5 +124,13 @@ namespace Task1
         {
             position = -1;
         }
+        //public virtual  V FormatY(V value)
+        //{
+        //    return value;
+        //}
+        //public virtual V FormatX(V value)
+        //{
+        //    return value;
+        //}
     }
 }

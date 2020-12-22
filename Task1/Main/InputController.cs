@@ -38,7 +38,7 @@ namespace Task1
         }
         public void NextPasswordAction(string password,DateTime startTime)
         {
-            if (InputMode == InputMode.Identify)
+            if (InputMode == InputMode.Identify || InputMode== InputMode.Verify)
             {
                 password = null;
             }
@@ -48,7 +48,7 @@ namespace Task1
 
         public PasswordAction EndPasswordAction(DateTime endTime,string passwordValue)
         {
-            if (InputMode == InputMode.Identify)
+            if (InputMode == InputMode.Identify || InputMode == InputMode.Verify)
             {
                 PasswordAction.ValidPassword = passwordValue;
             }
