@@ -82,12 +82,12 @@
       <DependentUpon>ChartForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Containers\LabelsContainer.cs" />
-    <None Include="Forms\FunctionChartForm.cs">
+    <Compile Include="Forms\FunctionChartForm.cs">
       <SubType>Form</SubType>
-    </None>
-    <None Include="Forms\FunctionChartForm.Designer.cs">
+    </Compile>
+    <Compile Include="Forms\FunctionChartForm.Designer.cs">
       <DependentUpon>FunctionChartForm.cs</DependentUpon>
-    </None>
+    </Compile>
     <Compile Include="Forms\KeysPressDurationChartForm.cs">
       <SubType>Form</SubType>
     </Compile>
