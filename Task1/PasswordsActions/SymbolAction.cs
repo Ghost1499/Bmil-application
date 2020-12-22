@@ -54,7 +54,8 @@ namespace Task1
             }
         }
         public double OverlayEndingTime { get => overlayEndingTime; set { if (value > overlayEndingTime) overlayEndingTime = value; } }
-
+        [NotMapped]
+        public string SymbolValue { get { return KeyValue.ToString(); } }
         [NotMapped]
         public double OverlayDuration { get => overlayEndingTime - KeyDownTime; }
         public bool IsShiftPressed { get; set; }

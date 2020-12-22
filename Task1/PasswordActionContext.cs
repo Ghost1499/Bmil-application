@@ -17,6 +17,7 @@ namespace Task1
 
         public DbSet<PasswordAction> PasswordActions { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<SymbolAction> SymbolActions { get; set; }
 
     }
 }
