@@ -210,8 +210,8 @@ namespace Task1
 
         private void functionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //FunctionChartForm functionChartForm = new FunctionChartForm(this, statistics);
-            //functionChartForm.Show();
+            FunctionChartForm functionChartForm = new FunctionChartForm(this);
+            functionChartForm.Show();
         }
 
         private void usersListBox_SelectedIndexChanged(object sender, EventArgs e)
