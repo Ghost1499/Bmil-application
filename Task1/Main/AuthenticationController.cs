@@ -15,7 +15,7 @@ namespace Task1.Main
         PasswordActionContext Context { get; set; }
         public Settings Settings { get; }
         public int CurrentUserId { get; private set; }
-        public AuthenticationController(PasswordActionContext context,Settings settings)
+        public AuthenticationController(PasswordActionContext context, Settings settings)
         {
             Context = context;
             Settings = settings ?? throw new ArgumentNullException(nameof(settings));
@@ -47,26 +47,73 @@ namespace Task1.Main
             Context.SaveChanges();
         }
 
-        public User IdentifyUser(PasswordAction passwordAction)
+        public User IdentifyUser(PasswordAction passwordAction, out double m, out double duration,out double different)
         {
-            List<PasswordAction> passwordActions=
-                Context.PasswordActions
-                .Include(p => p.SymbolActions)
-                .Where(p => p.ValidPassword == passwordAction.ValidPassword)
-                .ToList();
-            PasswordAction mostRelevantPasswordAction= passwordActions.FirstOrDefault(p => p.ValidPassword == passwordAction.ValidPassword);
-            User user = Context.Users.Find(mostRelevantPasswordAction.UserId);
-            return user;
+            m = 0;
+            different = 0;
+
+            duration = TimeSpanConverter.TotalSeconds(passwordAction.TimeDuration);
+            List<User> users = new List<User>();
+            using (PasswordActionContext tempContext = new PasswordActionContext())
+            {
+                //tempContext.PasswordActions.Where(p => p.ValidPassword == passwordAction.ValidPassword);
+                //tempContext.Users.Any( .Load();
+                users = tempContext.Users.Include(u => u.PasswordActions).ToList();
+            }
+
+            List<User> newUsers = new List<User>();
+            foreach (var user in users)
+            {
+                if(user.PasswordActions.Any(p => p.ValidPassword == passwordAction.ValidPassword)){
+                    newUsers.Add(user);
+                }
+            }
+
+            User identifyUser = null;
+            if (newUsers.Count == 0)
+                return identifyUser;
+            foreach (var tempUser in newUsers)
+            {
+
+                using (PasswordActionContext newTempContext = new PasswordActionContext())
+                {
+                    newTempContext.PasswordActions
+                        .Include(p => p.SymbolActions)
+                        .Where(p => p.UserId == tempUser.Id)
+                        .Load();
+                    DurationsStatistics statistics = new DurationsStatistics(newTempContext.PasswordActions.Local);
+
+                    if (identifyUser == null || Math.Abs(statistics.MathExpectation - duration) < different)
+                    {
+                        m = statistics.MathExpectation;
+                        different = Math.Abs(m - duration);
+                        identifyUser = tempUser;
+
+                    }
+                }
+            }
+            return identifyUser;
+
+            //    tempContext.Users
+            //    .Include(u => u.PasswordActions)
+            //    .Include(u => u.PasswordActions.Select(p => p.SymbolActions))
+            //    .Load();
+            //}
+            //return true;
+
+            //PasswordAction mostRelevantPasswordAction = passwordActions.FirstOrDefault(p => p.ValidPassword == passwordAction.ValidPassword);
+            //User user = Context.Users.Find(mostRelevantPasswordAction.UserId);
+            //return user;
         }
 
-        public bool VerifyUser(PasswordAction passwordAction,out double m, out double sigma, out double duration )
+        public bool VerifyUser(PasswordAction passwordAction, out double m, out double sigma, out double duration)
         {
-            using (PasswordActionContext tempContext=new PasswordActionContext())
+            using (PasswordActionContext tempContext = new PasswordActionContext())
             {
                 m = 0;
                 sigma = 0;
                 duration = TimeSpanConverter.TotalSeconds(passwordAction.TimeDuration);
-                  
+
                 //bool result = true;
                 tempContext.PasswordActions
                     .Include(p => p.SymbolActions)
@@ -80,11 +127,11 @@ namespace Task1.Main
                     return false;
 
                 }
-                
+
                 DurationsStatistics durationStatistics = new DurationsStatistics(tempContext.PasswordActions.Local);
                 m = durationStatistics.MathExpectation;
                 sigma = durationStatistics.Sigma;
-                if(Math.Abs(m- duration )> sigma)
+                if (Math.Abs(m - duration) > sigma)
                 {
                     return false;
                 }
