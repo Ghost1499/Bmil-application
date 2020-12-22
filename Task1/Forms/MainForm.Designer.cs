@@ -47,6 +47,7 @@
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.userInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenuStrip.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -87,7 +88,8 @@
             this.mainMenuStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.mainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.статистикаToolStripMenuItem,
-            this.settingsToolStripMenuItem});
+            this.settingsToolStripMenuItem,
+            this.userInformationToolStripMenuItem});
             this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.mainMenuStrip.Name = "mainMenuStrip";
             this.mainMenuStrip.Size = new System.Drawing.Size(1133, 33);
@@ -236,6 +238,13 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(628, 51);
             this.flowLayoutPanel1.TabIndex = 23;
             // 
+            // userInformationToolStripMenuItem
+            // 
+            this.userInformationToolStripMenuItem.Name = "userInformationToolStripMenuItem";
+            this.userInformationToolStripMenuItem.Size = new System.Drawing.Size(265, 29);
+            this.userInformationToolStripMenuItem.Text = "Информация о пользователе";
+            this.userInformationToolStripMenuItem.Click += new System.EventHandler(this.userInformationToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -283,6 +292,7 @@
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.ToolStripMenuItem userInformationToolStripMenuItem;
     }
 }
 

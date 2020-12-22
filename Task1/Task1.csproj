@@ -59,6 +59,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\UserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\UserForm.Designer.cs">
+      <DependentUpon>UserForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Statistics\VelocityStatistics.cs" />
     <None Include="Forms\Containers\ContainersBuilder.cs" />
     <Compile Include="Forms\Containers\IBuilder.cs" />
     <Compile Include="Forms\Containers\IUpdatable.cs" />
@@ -137,12 +144,12 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PasswordsActions\PasswordAction.cs" />
     <Compile Include="PasswordActionContext.cs" />
-    <None Include="Forms\PasswordsVelocityChartForm.cs">
+    <Compile Include="Forms\PasswordsVelocityChartForm.cs">
       <SubType>Form</SubType>
-    </None>
-    <None Include="Forms\PasswordsVelocityChartForm.Designer.cs">
+    </Compile>
+    <Compile Include="Forms\PasswordsVelocityChartForm.Designer.cs">
       <DependentUpon>PasswordsVelocityChartForm.cs</DependentUpon>
-    </None>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Main\Settings.cs" />
@@ -159,6 +166,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UserForm.resx">
+      <DependentUpon>UserForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010311410088_InitialCreate.resx">
       <DependentUpon>202010311410088_InitialCreate.cs</DependentUpon>
@@ -185,6 +195,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\PasswordAction.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

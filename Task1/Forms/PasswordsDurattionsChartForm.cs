@@ -85,7 +85,6 @@ namespace Task1.Forms
         protected override void InitChart()
         {
             base.InitChart();
-            //SeriesCollection series = Series;
             chart.Titles[0].Text = "Длительность набора парольной фразы в секундах";
             //chart.Series.Last().Points.DataBindY(daytimePasswords.PasswordActions.Local, "TimeDuration");
             chart.Series.Last().ChartType = SeriesChartType.Column;
@@ -109,6 +108,7 @@ namespace Task1.Forms
             LabelElements.Add(new LabelElement("Вечером Дисперсия", EveningtimeStatistics.GetDispersion, layoutPanel));
             LabelElements.Add(new LabelElement("Днем Среднеквадратическое отклонение", DaytimeStatistics.GetSigma, layoutPanel));
             LabelElements.Add(new LabelElement("Вечером Среднеквадратическое отклонение", EveningtimeStatistics.GetSigma, layoutPanel));
+
             //IBuilder fBuilder = new ContainersBuilder(new LabelsContainer(parent));
 
             //IBuilder builder = fBuilder.BuildContainer(parent, new GroupBox(), "Днем");
@@ -138,8 +138,8 @@ namespace Task1.Forms
 
         protected override void UpdateChart()
         {
-            DaytimePasswordsSeries.Points.DataBindY(daytimePasswords.PasswordActions.Local, "TimeDuration");
-            EveningtimePasswordsSeries.Points.DataBindY(eveningtimePasswords.PasswordActions.Local, "TimeDuration");
+            DaytimePasswordsSeries.Points.DataBindY(DaytimeStatistics/*daytimePasswords.PasswordActions.Local, "TimeDuration"*/);
+            EveningtimePasswordsSeries.Points.DataBindY(EveningtimeStatistics/*eveningtimePasswords.PasswordActions.Local, "TimeDuration"*/);
 
         }
         

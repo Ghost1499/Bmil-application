@@ -60,6 +60,16 @@ namespace Task1.Main
 
         public bool VerifyUser(PasswordAction passwordAction)
         {
+            using (PasswordActionContext tempContext=new PasswordActionContext())
+            {
+                List<PasswordAction> passwordActions = tempContext.PasswordActions
+                    .Include(p => p.SymbolActions)
+                    .Where(p => p.UserId == passwordAction.UserId)
+                    .Where(p => p.ValidPassword == passwordAction.ValidPassword)
+                    .ToList();
+                if (passwordActions.Count == 0)
+                    return false;
+            }
             return true;
         }
 
@@ -70,8 +80,6 @@ namespace Task1.Main
                 User user = new User(login);
                 Context.Users.Add(user);
                 Context.SaveChanges();
-
-
             }
             else
             {

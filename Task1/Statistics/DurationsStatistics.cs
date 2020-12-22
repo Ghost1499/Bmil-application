@@ -20,6 +20,10 @@ namespace Task1
             get { return Collection.ElementAt(index).TimeDuration; }
         }
 
+        public IEnumerator<double> GetEnumerator()
+        {
+            return new DurationStatisticsEnumerator(Collection);
+        }
 
         public override IEnumerable<double> ToIEnumerable()
         {
@@ -27,20 +31,39 @@ namespace Task1
             return enumerable;
         }
 
-        public IEnumerator GetEnumerator()
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            for (int i = 0; i < Collection.Count; i++)
-            {
-                yield return TimeSpanConverter.TotalSeconds(Collection[i].TimeDuration);
-            }
+            return new DurationStatisticsEnumerator(Collection);
         }
 
-        IEnumerator<double> IEnumerable<double>.GetEnumerator()
+        //public IEnumerator GetEnumerator()
+        //{
+        //    for (int i = 0; i < Collection.Count; i++)
+        //    {
+        //        yield return TimeSpanConverter.TotalSeconds(Collection[i].TimeDuration);
+        //    }
+        //}
+
+        //IEnumerator<double> IEnumerable<double>.GetEnumerator()
+        //{
+        //    for (int i = 0; i < Collection.Count; i++)
+        //    {
+        //        yield return TimeSpanConverter.TotalSeconds(Collection[i].TimeDuration);
+        //    }
+        //}
+    }
+
+    public class DurationStatisticsEnumerator : StatisticsEnumerator<PasswordAction,double>,IEnumerator<double>
+    {
+        public DurationStatisticsEnumerator(ObservableCollection<PasswordAction> collection):base(collection)
         {
-            for (int i = 0; i < Collection.Count; i++)
-            {
-                yield return TimeSpanConverter.TotalSeconds(Collection[i].TimeDuration);
-            }
+
+        }
+        public override object Current { get { return FormatY(((PasswordAction)base.Current).TimeDuration); } }
+        double IEnumerator<double>.Current { get { return (double)this.Current; } }
+        protected  double FormatY(double value)
+        {
+            return TimeSpanConverter.TotalSeconds(value);
         }
     }
 }
